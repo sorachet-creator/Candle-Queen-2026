@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import lanternImg from '@/assets/lantern.png';
-import LanternReleaseModal from './LanternReleaseModal';
+import LanternFlowModal from './LanternFlowModal';
 import ProvinceStatsModal from './ProvinceStatsModal';
 
 const HeroSection = () => {
@@ -120,7 +120,7 @@ const HeroSection = () => {
         </motion.div>
       </section>
 
-      <LanternReleaseModal
+      <LanternFlowModal
         isOpen={isLanternModalOpen}
         onClose={() => setIsLanternModalOpen(false)}
         onComplete={handleLanternComplete}
