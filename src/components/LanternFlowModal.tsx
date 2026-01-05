@@ -17,6 +17,7 @@ const regions = [
   { id: 'east', name: 'ภาคตะวันออก' },
   { id: 'west', name: 'ภาคตะวันตก' },
   { id: 'south', name: 'ภาคใต้' },
+  { id: 'international', name: 'ต่างประเทศ' },
 ];
 
 const provincesByRegion: Record<string, string[]> = {
@@ -123,7 +124,12 @@ const LanternFlowModal = ({ isOpen, onClose, onComplete }: LanternFlowModalProps
 
   const handleRegionSelect = (regionId: string) => {
     setSelectedRegion(regionId);
-    setStep('province');
+    if (regionId === 'international') {
+      setSelectedProvince('ต่างประเทศ');
+      setStep('question');
+    } else {
+      setStep('province');
+    }
   };
 
   const handleProvinceSelect = (province: string) => {
