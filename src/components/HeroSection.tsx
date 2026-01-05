@@ -4,6 +4,7 @@ import { ChevronDown } from 'lucide-react';
 import lanternImg from '@/assets/lantern.png';
 import LanternFlowModal from './LanternFlowModal';
 import ProvinceStatsModal from './ProvinceStatsModal';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 import queenFrame1 from '@/assets/queen-frame-1.png';
 import queenFrame2 from '@/assets/queen-frame-2.png';
@@ -17,6 +18,7 @@ const HeroSection = () => {
   const [isLanternModalOpen, setIsLanternModalOpen] = useState(false);
   const [isProvinceModalOpen, setIsProvinceModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,7 +63,7 @@ const HeroSection = () => {
               <motion.img
                 key={currentImageIndex}
                 src={queenImages[currentImageIndex]}
-                alt="สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง"
+                alt={t.hero.queenAlt}
                 className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -72,7 +74,7 @@ const HeroSection = () => {
           </div>
 
           <h2 className="text-3xl md:text-5xl font-semibold text-gold mb-6 text-shadow-gold">
-            ทะเลเทียนแห่งศรัทธา + จุดโคมลอย
+            {t.hero.title}
           </h2>
 
           <div className="flex items-center justify-center gap-4 mb-6">
@@ -82,7 +84,7 @@ const HeroSection = () => {
           </div>
 
           <p className="text-foreground/80 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
-            ตัวแทนของความสว่างที่ท่านได้สร้างไว้ในโลก โคมลอยแสดงถึงเราส่งแสงสว่างนี้กลับคืนฟ้าเบื้องบน
+            {t.hero.subtitle}
           </p>
 
           {/* Counter Card */}
@@ -104,7 +106,7 @@ const HeroSection = () => {
             />
             
             <div className="flex items-center justify-center gap-2 mb-2">
-              <span className="text-muted-foreground text-sm">ยอดจุดโคมลอย</span>
+              <span className="text-muted-foreground text-sm">{t.hero.lanternCount}</span>
               <span className="text-gold">👑</span>
             </div>
             
@@ -122,12 +124,12 @@ const HeroSection = () => {
             onClick={() => setIsProvinceModalOpen(true)}
             className="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors mb-8 cursor-pointer"
           >
-            ดูยอดแต่ละจังหวัด
+            {t.hero.viewProvinces}
             <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
           </button>
 
           <p className="text-muted-foreground mb-4">
-            กดปุ่มด้านล่างเพื่อเริ่มจุดโคมลอย
+            {t.hero.pressButton}
           </p>
 
           <motion.button
@@ -136,7 +138,7 @@ const HeroSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            จุดโคมลอยถวายความอาลัย
+            {t.hero.lightLanternBtn}
           </motion.button>
 
           <motion.a
@@ -146,7 +148,7 @@ const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            <span>เลื่อนด้านล่างเพื่อชมพระราชกรณียกิจ</span>
+            <span>{t.hero.scrollDown}</span>
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}

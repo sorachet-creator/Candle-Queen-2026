@@ -1,10 +1,11 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Language } from '@/lib/translations';
 
 const Header = () => {
-  const [activeLang, setActiveLang] = useState('TH');
+  const { language, setLanguage, t } = useLanguage();
 
-  const languages = ['TH', 'EN', 'CN'];
+  const languages: Language[] = ['TH', 'EN', 'CN'];
 
   return (
     <motion.header 
@@ -18,15 +19,15 @@ const Header = () => {
           className="text-gold text-lg md:text-xl font-semibold"
           whileHover={{ scale: 1.02 }}
         >
-          ร่วมส่งเสด็จสู่สวรรคาลัย
+          {t.header.title}
         </motion.h1>
 
         <nav className="hidden md:flex items-center gap-8">
           <a href="#lanterns" className="text-foreground/80 hover:text-gold transition-colors">
-            จุดโคมลอย
+            {t.header.lightLantern}
           </a>
           <a href="#royal-duties" className="text-foreground/80 hover:text-gold transition-colors">
-            พระราชกรณียกิจ
+            {t.header.royalDuties}
           </a>
         </nav>
 
@@ -34,9 +35,9 @@ const Header = () => {
           {languages.map((lang) => (
             <button
               key={lang}
-              onClick={() => setActiveLang(lang)}
+              onClick={() => setLanguage(lang)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-                activeLang === lang
+                language === lang
                   ? 'bg-gold text-primary-foreground'
                   : 'text-foreground/70 hover:text-foreground'
               }`}

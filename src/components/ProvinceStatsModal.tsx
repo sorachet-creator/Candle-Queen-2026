@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Search } from 'lucide-react';
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ProvinceStatsModalProps {
   isOpen: boolean;
@@ -30,6 +31,7 @@ const provinceData = [
 
 const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const { t } = useLanguage();
 
   const filteredProvinces = provinceData.filter(province =>
     province.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -64,7 +66,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
             <div className="sticky top-0 bg-card border-b border-border p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-semibold text-gold">
-                  ยอดจุดโคมลอยแต่ละจังหวัด
+                  {t.provinceStats.title}
                 </h3>
                 <button
                   onClick={onClose}
@@ -76,7 +78,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
 
               {/* Total count */}
               <div className="bg-secondary/50 rounded-xl p-4 mb-4">
-                <p className="text-sm text-muted-foreground mb-1">ยอดรวมทั่วประเทศ</p>
+                <p className="text-sm text-muted-foreground mb-1">{t.provinceStats.totalCountry}</p>
                 <p className="text-3xl font-bold text-gold">{totalCount.toLocaleString()}</p>
               </div>
 
@@ -85,7 +87,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type="text"
-                  placeholder="ค้นหาจังหวัด..."
+                  placeholder={t.provinceStats.searchPlaceholder}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 bg-secondary border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold/50"
@@ -118,7 +120,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
 
                 {filteredProvinces.length === 0 && (
                   <p className="text-center text-muted-foreground py-8">
-                    ไม่พบจังหวัดที่ค้นหา
+                    {t.provinceStats.noResults}
                   </p>
                 )}
               </div>
