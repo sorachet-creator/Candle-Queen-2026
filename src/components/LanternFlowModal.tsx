@@ -392,6 +392,19 @@ const LanternFlowModal = ({
             opacity: 1,
             scale: 1
           }} className="text-center">
+                  {/* Queen Image */}
+                  <motion.div initial={{
+              opacity: 0,
+              y: -20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.1
+            }} className="mb-6">
+                    <img src={queenImg} alt="สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง" className="w-48 h-auto mx-auto drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]" />
+                  </motion.div>
+
                   <motion.div className="text-6xl mb-4" animate={{
               scale: [1, 1.1, 1]
             }} transition={{
@@ -409,19 +422,6 @@ const LanternFlowModal = ({
                   <p className="text-foreground/50 text-sm mb-6">
                     ได้ลอยขึ้นสู่ฟ้าแล้ว
                   </p>
-
-                  {/* Queen Image */}
-                  <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              delay: 0.3
-            }} className="mb-6">
-                    <img src={queenImg} alt="สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง" className="w-48 h-auto mx-auto drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]" />
-                  </motion.div>
 
                   {/* Share Buttons */}
                   <motion.div initial={{
