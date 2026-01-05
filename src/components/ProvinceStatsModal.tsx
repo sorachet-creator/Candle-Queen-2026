@@ -9,32 +9,32 @@ interface ProvinceStatsModalProps {
 }
 
 const provinceData = [
-  { name: 'กรุงเทพมหานคร', count: 12500000 },
-  { name: 'เชียงใหม่', count: 4200000 },
-  { name: 'ภูเก็ต', count: 3800000 },
-  { name: 'ขอนแก่น', count: 3500000 },
-  { name: 'นครราชสีมา', count: 3200000 },
-  { name: 'ชลบุรี', count: 2900000 },
-  { name: 'สงขลา', count: 2700000 },
-  { name: 'เชียงราย', count: 2500000 },
-  { name: 'อุดรธานี', count: 2300000 },
-  { name: 'สุราษฎร์ธานี', count: 2100000 },
-  { name: 'นครศรีธรรมราช', count: 1900000 },
-  { name: 'พิษณุโลก', count: 1700000 },
-  { name: 'ระยอง', count: 1500000 },
-  { name: 'อุบลราชธานี', count: 1400000 },
-  { name: 'นนทบุรี', count: 1300000 },
-  { name: 'สมุทรปราการ', count: 1200000 },
-  { name: 'ปทุมธานี', count: 1100000 },
-  { name: 'ลำปาง', count: 1000000 },
+  { name: { TH: 'กรุงเทพมหานคร', EN: 'Bangkok', CN: '曼谷' }, count: 12500000 },
+  { name: { TH: 'เชียงใหม่', EN: 'Chiang Mai', CN: '清迈' }, count: 4200000 },
+  { name: { TH: 'ภูเก็ต', EN: 'Phuket', CN: '普吉' }, count: 3800000 },
+  { name: { TH: 'ขอนแก่น', EN: 'Khon Kaen', CN: '孔敬' }, count: 3500000 },
+  { name: { TH: 'นครราชสีมา', EN: 'Nakhon Ratchasima', CN: '呵叻' }, count: 3200000 },
+  { name: { TH: 'ชลบุรี', EN: 'Chonburi', CN: '春武里' }, count: 2900000 },
+  { name: { TH: 'สงขลา', EN: 'Songkhla', CN: '宋卡' }, count: 2700000 },
+  { name: { TH: 'เชียงราย', EN: 'Chiang Rai', CN: '清莱' }, count: 2500000 },
+  { name: { TH: 'อุดรธานี', EN: 'Udon Thani', CN: '乌隆他尼' }, count: 2300000 },
+  { name: { TH: 'สุราษฎร์ธานี', EN: 'Surat Thani', CN: '素叻他尼' }, count: 2100000 },
+  { name: { TH: 'นครศรีธรรมราช', EN: 'Nakhon Si Thammarat', CN: '洛坤' }, count: 1900000 },
+  { name: { TH: 'พิษณุโลก', EN: 'Phitsanulok', CN: '彭世洛' }, count: 1700000 },
+  { name: { TH: 'ระยอง', EN: 'Rayong', CN: '罗勇' }, count: 1500000 },
+  { name: { TH: 'อุบลราชธานี', EN: 'Ubon Ratchathani', CN: '乌汶' }, count: 1400000 },
+  { name: { TH: 'นนทบุรี', EN: 'Nonthaburi', CN: '暖武里' }, count: 1300000 },
+  { name: { TH: 'สมุทรปราการ', EN: 'Samut Prakan', CN: '北榄' }, count: 1200000 },
+  { name: { TH: 'ปทุมธานี', EN: 'Pathum Thani', CN: '巴吞他尼' }, count: 1100000 },
+  { name: { TH: 'ลำปาง', EN: 'Lampang', CN: '南邦' }, count: 1000000 },
 ];
 
 const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const filteredProvinces = provinceData.filter(province =>
-    province.name.toLowerCase().includes(searchTerm.toLowerCase())
+    province.name[language].toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const totalCount = provinceData.reduce((sum, p) => sum + p.count, 0);
@@ -100,7 +100,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
               <div className="space-y-3">
                 {filteredProvinces.map((province, index) => (
                   <motion.div
-                    key={province.name}
+                    key={province.name.TH}
                     className="flex items-center justify-between p-4 bg-secondary/30 rounded-xl hover:bg-secondary/50 transition-colors"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -110,7 +110,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                       <span className="w-8 h-8 flex items-center justify-center bg-gold/20 text-gold text-sm font-semibold rounded-full">
                         {index + 1}
                       </span>
-                      <span className="text-foreground">{province.name}</span>
+                      <span className="text-foreground">{province.name[language]}</span>
                     </div>
                     <span className="text-gold font-semibold tabular-nums">
                       {province.count.toLocaleString()}
