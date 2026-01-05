@@ -26,9 +26,9 @@ const regionNames: Record<Region, { TH: string; EN: string; CN: string }> = {
   south: { TH: 'ภาคใต้', EN: 'Southern Region', CN: '南部地区' },
 };
 
+const internationalData = { name: { TH: 'ต่างประเทศ', EN: 'International', CN: '国际' }, count: 8500000 };
+
 const provinceData: ProvinceData[] = [
-  // ต่างประเทศ (International)
-  { name: { TH: 'ต่างประเทศ', EN: 'International', CN: '国际' }, count: 8500000, region: 'international' },
   // ภาคกลาง (Central)
   { name: { TH: 'กรุงเทพมหานคร', EN: 'Bangkok', CN: '曼谷' }, count: 12500000, region: 'central' },
   { name: { TH: 'นนทบุรี', EN: 'Nonthaburi', CN: '暖武里' }, count: 1300000, region: 'central' },
@@ -113,19 +113,22 @@ const provinceData: ProvinceData[] = [
   { name: { TH: 'นราธิวาส', EN: 'Narathiwat', CN: '陶公' }, count: 800000, region: 'south' },
 ];
 
-const regionOrder: Region[] = ['international', 'central', 'north', 'northeast', 'east', 'south'];
+const regionOrder: Region[] = ['central', 'north', 'northeast', 'east', 'south'];
 
 const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [expandedRegions, setExpandedRegions] = useState<Record<Region, boolean>>({
-    international: true,
+    international: false,
     central: true,
     north: true,
     northeast: true,
     east: true,
     south: true,
   });
+
   const { t, language } = useLanguage();
+
+  const showInternational = searchTerm === '' || internationalData.name[language].toLowerCase().includes(searchTerm.toLowerCase());
 
   const toggleRegion = (region: Region) => {
     setExpandedRegions(prev => ({ ...prev, [region]: !prev[region] }));
@@ -158,7 +161,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
     return groupedProvinces[region].reduce((sum, p) => sum + p.count, 0);
   };
 
-  const totalCount = provinceData.reduce((sum, p) => sum + p.count, 0);
+  const totalCount = provinceData.reduce((sum, p) => sum + p.count, 0) + internationalData.count;
 
   const getRankInRegion = (province: ProvinceData, region: Region) => {
     const sortedInRegion = groupedProvinces[region];
@@ -224,6 +227,18 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
             {/* Province list by region */}
             <div className="overflow-y-auto max-h-[400px] p-6">
               <div className="space-y-4">
+                {/* International - not grouped */}
+                {showInternational && (
+                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-gold/10 to-transparent border border-gold/30 rounded-xl">
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg">🌍</span>
+                      <span className="text-foreground font-semibold">{internationalData.name[language]}</span>
+                    </div>
+                    <span className="text-gold font-bold tabular-nums text-lg">
+                      {internationalData.count.toLocaleString()}
+                    </span>
+                  </div>
+                )}
                 {regionOrder.map(region => {
                   const provinces = groupedProvinces[region];
                   if (provinces.length === 0) return null;
