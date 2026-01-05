@@ -5,7 +5,7 @@ import FloatingLanterns from '@/components/FloatingLanterns';
 
 const Index = () => {
   return (
-    <div className="relative min-h-screen bg-background overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden">
       <FloatingLanterns />
       <Header />
       <main className="relative z-10">
