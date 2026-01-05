@@ -49,20 +49,50 @@ const provincesByRegion: Record<string, string[]> = {
   ],
 };
 
-const questions = [
+// Quiz questions based on real royal duties
+const quizQuestions = [
   {
     id: 1,
-    question: 'ท่านเคยได้รับพระมหากรุณาธิคุณจากพระราชกรณียกิจใดบ้าง?',
-    options: [
-      'โครงการพระราชดำริด้านการเกษตร',
-      'โครงการด้านการศึกษา',
-      'โครงการด้านการสาธารณสุข',
-      'โครงการอนุรักษ์ทรัพยากรธรรมชาติ',
-      'อื่นๆ / ไม่ระบุ'
-    ]
+    question: 'มูลนิธิส่งเสริมศิลปาชีพฯ (SUPPORT Foundation) ก่อตั้งขึ้นเมื่อปีใด?',
+    options: ['พ.ศ. 2515', 'พ.ศ. 2519', 'พ.ศ. 2525', 'พ.ศ. 2530'],
+    correctAnswer: 'พ.ศ. 2519'
+  },
+  {
+    id: 2,
+    question: 'โครงการป่ารักน้ำ มีวัตถุประสงค์หลักเพื่ออะไร?',
+    options: ['ส่งเสริมการท่องเที่ยว', 'ฟื้นฟูสภาพป่าต้นน้ำ', 'สร้างเขื่อนกั้นน้ำ', 'ปลูกพืชเศรษฐกิจ'],
+    correctAnswer: 'ฟื้นฟูสภาพป่าต้นน้ำ'
+  },
+  {
+    id: 3,
+    question: 'โครงการฟาร์มตัวอย่างเริ่มดำเนินการในปีใด?',
+    options: ['พ.ศ. 2535', 'พ.ศ. 2538', 'พ.ศ. 2541', 'พ.ศ. 2545'],
+    correctAnswer: 'พ.ศ. 2541'
+  },
+  {
+    id: 4,
+    question: 'โครงการคืนช้างสู่ธรรมชาติมีจุดประสงค์หลักคืออะไร?',
+    options: ['ฝึกช้างเพื่อการท่องเที่ยว', 'ฟื้นฟูประชากรช้างป่าไทย', 'ส่งออกช้างไปต่างประเทศ', 'เลี้ยงช้างเพื่อการเกษตร'],
+    correctAnswer: 'ฟื้นฟูประชากรช้างป่าไทย'
+  },
+  {
+    id: 5,
+    question: 'สมเด็จพระนางเจ้าสิริกิติ์ฯ พระราชทานเกาะใดเป็นสถานที่อนุรักษ์พันธุ์เต่าทะเล?',
+    options: ['เกาะสมุย', 'เกาะมันใน', 'เกาะเต่า', 'เกาะพีพี'],
+    correctAnswer: 'เกาะมันใน'
+  },
+  {
+    id: 6,
+    question: 'การอนุรักษ์โขนได้รับการสืบสานจากสมเด็จพระนางเจ้าสิริกิติ์ฯ ตั้งแต่ปีใด?',
+    options: ['พ.ศ. 2540', 'พ.ศ. 2543', 'พ.ศ. 2546', 'พ.ศ. 2550'],
+    correctAnswer: 'พ.ศ. 2546'
   }
 ];
 
+// Get a random question
+const getRandomQuestion = () => {
+  return quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
+};
 type Step = 'region' | 'province' | 'question' | 'release' | 'success';
 
 const LanternFlowModal = ({ isOpen, onClose, onComplete }: LanternFlowModalProps) => {
@@ -71,6 +101,9 @@ const LanternFlowModal = ({ isOpen, onClose, onComplete }: LanternFlowModalProps
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isReleased, setIsReleased] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(() => getRandomQuestion());
+  const [isWrongAnswer, setIsWrongAnswer] = useState(false);
+  const [wrongAnswerText, setWrongAnswerText] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -81,6 +114,9 @@ const LanternFlowModal = ({ isOpen, onClose, onComplete }: LanternFlowModalProps
         setSelectedProvince(null);
         setSelectedAnswer(null);
         setIsReleased(false);
+        setCurrentQuestion(getRandomQuestion());
+        setIsWrongAnswer(false);
+        setWrongAnswerText(null);
       }, 300);
     }
   }, [isOpen]);
@@ -96,8 +132,15 @@ const LanternFlowModal = ({ isOpen, onClose, onComplete }: LanternFlowModalProps
   };
 
   const handleAnswerSelect = (answer: string) => {
-    setSelectedAnswer(answer);
-    setStep('release');
+    if (answer === currentQuestion.correctAnswer) {
+      setSelectedAnswer(answer);
+      setIsWrongAnswer(false);
+      setWrongAnswerText(null);
+      setStep('release');
+    } else {
+      setIsWrongAnswer(true);
+      setWrongAnswerText(answer);
+    }
   };
 
   const handleRelease = () => {
@@ -285,7 +328,11 @@ const LanternFlowModal = ({ isOpen, onClose, onComplete }: LanternFlowModalProps
                   className="text-center"
                 >
                   <button
-                    onClick={goBack}
+                    onClick={() => {
+                      goBack();
+                      setIsWrongAnswer(false);
+                      setWrongAnswerText(null);
+                    }}
                     className="absolute top-0 left-0 flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5" />
@@ -294,22 +341,40 @@ const LanternFlowModal = ({ isOpen, onClose, onComplete }: LanternFlowModalProps
 
                   <div className="text-4xl mb-4">📝</div>
                   <h3 className="text-xl md:text-2xl font-semibold text-gold mb-2">
-                    {questions[0].question}
+                    {currentQuestion.question}
                   </h3>
-                  <p className="text-foreground/70 text-sm mb-6">
+                  <p className="text-foreground/70 text-sm mb-4">
                     จังหวัด{selectedProvince}
                   </p>
 
+                  {isWrongAnswer && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mb-4 p-3 bg-destructive/20 border border-destructive/50 rounded-lg"
+                    >
+                      <p className="text-destructive text-sm">
+                        ❌ คำตอบไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง
+                      </p>
+                    </motion.div>
+                  )}
+
                   <div className="space-y-3">
-                    {questions[0].options.map((option) => (
+                    {currentQuestion.options.map((option) => (
                       <motion.button
                         key={option}
                         onClick={() => handleAnswerSelect(option)}
-                        className="w-full p-4 bg-secondary/50 border border-border hover:border-gold hover:bg-gold/10 rounded-xl text-foreground text-left transition-all flex items-center gap-3"
+                        className={`w-full p-4 bg-secondary/50 border rounded-xl text-foreground text-left transition-all flex items-center gap-3 ${
+                          wrongAnswerText === option 
+                            ? 'border-destructive/50 bg-destructive/10' 
+                            : 'border-border hover:border-gold hover:bg-gold/10'
+                        }`}
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                       >
-                        <ChevronRight className="w-5 h-5 text-gold flex-shrink-0" />
+                        <ChevronRight className={`w-5 h-5 flex-shrink-0 ${
+                          wrongAnswerText === option ? 'text-destructive' : 'text-gold'
+                        }`} />
                         <span>{option}</span>
                       </motion.button>
                     ))}
