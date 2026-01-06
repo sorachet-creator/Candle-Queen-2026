@@ -216,7 +216,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                 <p className="text-sm text-muted-foreground mb-3">
                   {language === 'TH' ? 'อันดับภาคยอดโคมลอยสูงสุด' : language === 'EN' ? 'Top Regions by Lanterns' : '孔明灯数量最多的地区'}
                 </p>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-4">
                   {(() => {
                     const regionTotals = [
                       { region: 'international' as Region, name: regionNames.international, count: internationalData.count, topProvince: null },
