@@ -216,7 +216,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                 <p className="text-sm text-muted-foreground mb-3">
                   {language === 'TH' ? 'อันดับภาคยอดโคมลอยสูงสุด' : language === 'EN' ? 'Top Regions by Lanterns' : '孔明灯数量最多的地区'}
                 </p>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="flex justify-center gap-6">
                   {(() => {
                     const regionTotals = [
                       { region: 'international' as Region, name: regionNames.international, count: internationalData.count, topProvince: null },
@@ -244,7 +244,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                           stiffness: 300,
                           damping: 15
                         }}
-                        className={`${trophyStyles[index].bg} ${trophyStyles[index].order} border ${trophyStyles[index].border} rounded-xl p-3 text-center ${index === 0 ? 'z-10' : ''}`}
+                        className={`${trophyStyles[index].bg} ${trophyStyles[index].order} border ${trophyStyles[index].border} rounded-xl p-2 text-center w-24 ${index === 0 ? 'z-10' : ''}`}
                       >
                         <motion.div
                           initial={{ rotate: 0 }}
