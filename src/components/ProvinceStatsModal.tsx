@@ -244,7 +244,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                           stiffness: 300,
                           damping: 15
                         }}
-                        className={`${trophyStyles[index].bg} ${trophyStyles[index].order} border ${trophyStyles[index].border} rounded-xl p-2 text-center w-24 ${index === 0 ? 'z-10' : ''}`}
+                        className={`${trophyStyles[index].bg} ${trophyStyles[index].order} border ${trophyStyles[index].border} rounded-xl py-2 px-6 text-center ${index === 0 ? 'z-10' : ''}`}
                       >
                         <motion.div
                           initial={{ rotate: 0 }}
