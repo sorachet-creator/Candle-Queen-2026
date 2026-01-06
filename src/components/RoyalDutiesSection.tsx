@@ -23,12 +23,17 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project, index, image, isReversed, yearLabel, readMoreLabel }: ProjectCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  // Increased parallax effect
+  const imageY = useTransform(scrollYProgress, [0, 1], [120, -120]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
+  const badgeY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
     <motion.div
@@ -40,21 +45,26 @@ const ProjectCard = ({ project, index, image, isReversed, yearLabel, readMoreLab
       transition={{ duration: 0.7, delay: 0.1 }}
     >
       {/* Image Side */}
-      <div className="w-full lg:w-1/2 relative">
+      <div className="w-full lg:w-1/2 relative overflow-hidden rounded-lg">
         <motion.div 
-          className="relative overflow-hidden rounded-lg"
-          style={{ y }}
+          ref={imageRef}
+          className="relative"
+          style={{ y: imageY }}
         >
-          <img
+          <motion.img
             src={image}
             alt={project.title}
             className="w-full h-64 md:h-80 lg:h-96 object-cover"
+            style={{ scale: imageScale }}
           />
-          {/* Year Badge */}
-          <div className="absolute top-4 left-4 flex flex-col items-center">
-            <span className="text-muted-foreground text-xs uppercase tracking-wider">{yearLabel}</span>
-            <span className="text-gold text-2xl font-bold">{project.year}</span>
-          </div>
+        </motion.div>
+        {/* Year Badge with separate parallax */}
+        <motion.div 
+          className="absolute top-4 left-4 flex flex-col items-center bg-background/80 backdrop-blur-sm px-3 py-2 rounded-lg"
+          style={{ y: badgeY }}
+        >
+          <span className="text-muted-foreground text-xs uppercase tracking-wider">{yearLabel}</span>
+          <span className="text-gold text-2xl font-bold">{project.year}</span>
         </motion.div>
       </div>
 
