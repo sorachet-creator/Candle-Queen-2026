@@ -3,6 +3,7 @@ import { X, Search, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Language } from '@/lib/translations';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, Tooltip } from 'recharts';
 
 interface ProvinceStatsModalProps {
   isOpen: boolean;
@@ -209,6 +210,49 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
               <div className="bg-secondary/50 rounded-xl p-4 mb-4">
                 <p className="text-sm text-muted-foreground mb-1">{t.provinceStats.totalCountry}</p>
                 <p className="text-3xl font-bold text-gold">{totalCount.toLocaleString()}</p>
+              </div>
+
+              {/* Region Chart */}
+              <div className="bg-secondary/30 rounded-xl p-4 mb-4">
+                <p className="text-sm text-muted-foreground mb-3">
+                  {language === 'TH' ? 'สถิติโคมลอยแต่ละภาค' : language === 'EN' ? 'Lanterns by Region' : '各地区孔明灯统计'}
+                </p>
+                <div className="h-[180px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                      data={[
+                        { name: language === 'TH' ? 'ต่างประเทศ' : language === 'EN' ? 'International' : '国际', value: internationalData.count, color: '#a855f7' },
+                        { name: language === 'TH' ? 'กลาง' : language === 'EN' ? 'Central' : '中部', value: provinceData.filter(p => p.region === 'central').reduce((s, p) => s + p.count, 0), color: '#f59e0b' },
+                        { name: language === 'TH' ? 'เหนือ' : language === 'EN' ? 'North' : '北部', value: provinceData.filter(p => p.region === 'north').reduce((s, p) => s + p.count, 0), color: '#10b981' },
+                        { name: language === 'TH' ? 'อีสาน' : language === 'EN' ? 'Northeast' : '东北', value: provinceData.filter(p => p.region === 'northeast').reduce((s, p) => s + p.count, 0), color: '#3b82f6' },
+                        { name: language === 'TH' ? 'ตะวันออก' : language === 'EN' ? 'East' : '东部', value: provinceData.filter(p => p.region === 'east').reduce((s, p) => s + p.count, 0), color: '#ec4899' },
+                        { name: language === 'TH' ? 'ใต้' : language === 'EN' ? 'South' : '南部', value: provinceData.filter(p => p.region === 'south').reduce((s, p) => s + p.count, 0), color: '#06b6d4' },
+                      ]}
+                      layout="vertical"
+                      margin={{ top: 5, right: 30, left: 60, bottom: 5 }}
+                    >
+                      <XAxis type="number" tickFormatter={(v) => `${(v / 1000000).toFixed(0)}M`} stroke="hsl(var(--muted-foreground))" fontSize={11} />
+                      <YAxis type="category" dataKey="name" stroke="hsl(var(--muted-foreground))" fontSize={11} width={55} />
+                      <Tooltip 
+                        formatter={(value: number) => [value.toLocaleString(), language === 'TH' ? 'โคมลอย' : language === 'EN' ? 'Lanterns' : '孔明灯']}
+                        contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: '8px' }}
+                        labelStyle={{ color: 'hsl(var(--foreground))' }}
+                      />
+                      <Bar dataKey="value" radius={[0, 4, 4, 0]}>
+                        {[
+                          { color: '#a855f7' },
+                          { color: '#f59e0b' },
+                          { color: '#10b981' },
+                          { color: '#3b82f6' },
+                          { color: '#ec4899' },
+                          { color: '#06b6d4' },
+                        ].map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
               </div>
 
               {/* Search */}
