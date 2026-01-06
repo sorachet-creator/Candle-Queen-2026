@@ -67,7 +67,7 @@ export const translations = {
     },
     // Footer
     footer: {
-      copyright: 'ร่วมส่งเสด็จสู่สวรรคาลัย © 2024',
+      copyright: '© 2025 สมาคมเทคโนโลยีเพื่อการตลาด (Technology for Marketing Association) เว็บไซต์นี้จัดทำขึ้นเพื่อเป็นการเฉลิมพระเกียรติ',
     },
     // Project Detail
     projectDetail: {
@@ -194,7 +194,7 @@ export const translations = {
     },
     // Footer
     footer: {
-      copyright: 'Royal Remembrance © 2024',
+      copyright: '© 2025 Technology for Marketing Association. This website is created in tribute.',
     },
     // Project Detail
     projectDetail: {
@@ -321,7 +321,7 @@ export const translations = {
     },
     // Footer
     footer: {
-      copyright: '皇室悼念 © 2024',
+      copyright: '© 2025 市场技术协会。本网站为致敬而建。',
     },
     // Project Detail
     projectDetail: {
