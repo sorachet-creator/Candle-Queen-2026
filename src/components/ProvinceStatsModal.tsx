@@ -219,12 +219,12 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                 <div className="grid grid-cols-3 gap-3">
                   {(() => {
                     const regionTotals = [
-                      { region: 'international' as Region, name: regionNames.international, count: internationalData.count },
-                      { region: 'central' as Region, name: regionNames.central, count: provinceData.filter(p => p.region === 'central').reduce((s, p) => s + p.count, 0) },
-                      { region: 'north' as Region, name: regionNames.north, count: provinceData.filter(p => p.region === 'north').reduce((s, p) => s + p.count, 0) },
-                      { region: 'northeast' as Region, name: regionNames.northeast, count: provinceData.filter(p => p.region === 'northeast').reduce((s, p) => s + p.count, 0) },
-                      { region: 'east' as Region, name: regionNames.east, count: provinceData.filter(p => p.region === 'east').reduce((s, p) => s + p.count, 0) },
-                      { region: 'south' as Region, name: regionNames.south, count: provinceData.filter(p => p.region === 'south').reduce((s, p) => s + p.count, 0) },
+                      { region: 'international' as Region, name: regionNames.international, count: internationalData.count, topProvince: null },
+                      { region: 'central' as Region, name: regionNames.central, count: provinceData.filter(p => p.region === 'central').reduce((s, p) => s + p.count, 0), topProvince: provinceData.filter(p => p.region === 'central').sort((a, b) => b.count - a.count)[0] },
+                      { region: 'north' as Region, name: regionNames.north, count: provinceData.filter(p => p.region === 'north').reduce((s, p) => s + p.count, 0), topProvince: provinceData.filter(p => p.region === 'north').sort((a, b) => b.count - a.count)[0] },
+                      { region: 'northeast' as Region, name: regionNames.northeast, count: provinceData.filter(p => p.region === 'northeast').reduce((s, p) => s + p.count, 0), topProvince: provinceData.filter(p => p.region === 'northeast').sort((a, b) => b.count - a.count)[0] },
+                      { region: 'east' as Region, name: regionNames.east, count: provinceData.filter(p => p.region === 'east').reduce((s, p) => s + p.count, 0), topProvince: provinceData.filter(p => p.region === 'east').sort((a, b) => b.count - a.count)[0] },
+                      { region: 'south' as Region, name: regionNames.south, count: provinceData.filter(p => p.region === 'south').reduce((s, p) => s + p.count, 0), topProvince: provinceData.filter(p => p.region === 'south').sort((a, b) => b.count - a.count)[0] },
                     ].sort((a, b) => b.count - a.count).slice(0, 3);
 
                     const trophyStyles = [
@@ -236,12 +236,27 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                     return regionTotals.map((item, index) => (
                       <motion.div
                         key={item.region}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className={`${trophyStyles[index].bg} ${trophyStyles[index].order} border ${trophyStyles[index].border} rounded-xl p-3 text-center ${index === 0 ? 'scale-110 z-10' : ''}`}
+                        initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                        animate={{ opacity: 1, y: 0, scale: index === 0 ? 1.1 : 1 }}
+                        transition={{ 
+                          delay: index * 0.15,
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 15
+                        }}
+                        className={`${trophyStyles[index].bg} ${trophyStyles[index].order} border ${trophyStyles[index].border} rounded-xl p-3 text-center ${index === 0 ? 'z-10' : ''}`}
                       >
-                        <Trophy className={`w-6 h-6 mx-auto mb-1 ${trophyStyles[index].icon}`} />
+                        <motion.div
+                          initial={{ rotate: 0 }}
+                          animate={{ rotate: [0, -10, 10, -5, 5, 0] }}
+                          transition={{ 
+                            delay: 0.5 + index * 0.15,
+                            duration: 0.6,
+                            ease: "easeInOut"
+                          }}
+                        >
+                          <Trophy className={`w-6 h-6 mx-auto mb-1 ${trophyStyles[index].icon}`} />
+                        </motion.div>
                         <p className="text-xs text-muted-foreground mb-1">
                           {language === 'TH' ? `อันดับ ${index + 1}` : language === 'EN' ? `#${index + 1}` : `第${index + 1}名`}
                         </p>
@@ -251,6 +266,11 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                         <p className="text-gold font-bold text-sm tabular-nums">
                           {(item.count / 1000000).toFixed(1)}M
                         </p>
+                        {item.topProvince && (
+                          <p className="text-[10px] text-muted-foreground mt-1 truncate">
+                            🏆 {item.topProvince.name[language]}
+                          </p>
+                        )}
                       </motion.div>
                     ));
                   })()}
