@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useRef } from 'react';
 import project1 from '@/assets/project-1.jpg';
 import project2 from '@/assets/project-2.jpg';
 import project3 from '@/assets/project-3.jpg';
@@ -11,14 +12,89 @@ import project7 from '@/assets/project-7.jpg';
 
 const projectImages = [project1, project2, project3, project4, project5, project6, project7];
 
+interface ProjectCardProps {
+  project: { id: number; year: number; title: string; description: string };
+  index: number;
+  image: string;
+  isReversed: boolean;
+  yearLabel: string;
+  readMoreLabel: string;
+}
+
+const ProjectCard = ({ project, index, image, isReversed, yearLabel, readMoreLabel }: ProjectCardProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+  return (
+    <motion.div
+      ref={ref}
+      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 items-center`}
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.7, delay: 0.1 }}
+    >
+      {/* Image Side */}
+      <div className="w-full lg:w-1/2 relative">
+        <motion.div 
+          className="relative overflow-hidden rounded-lg"
+          style={{ y }}
+        >
+          <img
+            src={image}
+            alt={project.title}
+            className="w-full h-64 md:h-80 lg:h-96 object-cover"
+          />
+          {/* Year Badge */}
+          <div className="absolute top-4 left-4 flex flex-col items-center">
+            <span className="text-muted-foreground text-xs uppercase tracking-wider">{yearLabel}</span>
+            <span className="text-gold text-2xl font-bold">{project.year}</span>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Content Side */}
+      <div className={`w-full lg:w-1/2 ${isReversed ? 'lg:text-right lg:pr-8' : 'lg:text-left lg:pl-8'}`}>
+        <motion.div
+          initial={{ opacity: 0, x: isReversed ? 30 : -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gold mb-4 leading-tight">
+            {project.title}
+          </h3>
+          <p className="text-foreground/70 text-sm md:text-base leading-relaxed mb-6">
+            {project.description}
+          </p>
+          <Link 
+            to={`/project/${project.id}`}
+            className={`inline-flex items-center gap-2 px-6 py-2 border border-gold/50 rounded-full text-gold text-sm hover:bg-gold/10 transition-all duration-300 ${isReversed ? 'flex-row-reverse' : ''}`}
+          >
+            {readMoreLabel}
+            <svg className={`w-4 h-4 ${isReversed ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
 const RoyalDutiesSection = () => {
   const { t, language } = useLanguage();
 
   return (
     <section id="royal-duties" className="relative py-24 px-6">
-      <div className="container mx-auto">
+      <div className="container mx-auto max-w-6xl">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -35,45 +111,17 @@ const RoyalDutiesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="space-y-24 lg:space-y-32">
           {t.projects.map((project, index) => (
-            <Link key={project.id} to={`/project/${project.id}`}>
-              <motion.article
-                className="group relative bg-card rounded-xl overflow-hidden border border-border hover:border-gold/50 transition-all duration-300 cursor-pointer h-full"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={projectImages[index]}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
-                  <span className="absolute top-4 left-4 px-3 py-1 bg-gold/20 backdrop-blur-sm border border-gold/30 rounded-full text-gold text-sm">
-                    {language === 'TH' ? 'พ.ศ.' : t.royalDuties.year} {project.year}
-                  </span>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-3 group-hover:text-gold transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    {project.description}
-                  </p>
-                  <span className="text-gold text-sm hover:text-gold-light transition-colors flex items-center gap-1">
-                    {t.royalDuties.readMore}
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </div>
-              </motion.article>
-            </Link>
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              image={projectImages[index]}
+              isReversed={index % 2 === 1}
+              yearLabel={language === 'TH' ? 'พ.ศ.' : t.royalDuties.year}
+              readMoreLabel={t.royalDuties.readMore}
+            />
           ))}
         </div>
       </div>
