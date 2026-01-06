@@ -237,7 +237,7 @@ const ProvinceStatsModal = ({ isOpen, onClose }: ProvinceStatsModalProps) => {
                       <motion.div
                         key={item.region}
                         initial={{ opacity: 0, y: 20, scale: 0.8 }}
-                        animate={{ opacity: 1, y: 0, scale: index === 0 ? 1.1 : 1 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
                         transition={{ 
                           delay: index * 0.15,
                           type: "spring",
