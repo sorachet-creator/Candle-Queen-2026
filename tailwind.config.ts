@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        thai: ['"Noto Sans Thai"', 'sans-serif'],
+        sans: ['Prompt', 'sans-serif'],
+        prompt: ['Prompt', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
