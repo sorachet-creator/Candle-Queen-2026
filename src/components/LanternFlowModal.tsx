@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight, ChevronLeft, MapPin, Check, Facebook, Twitter } from 'lucide-react';
 import lanternImg from '@/assets/lantern.png';
-import queenImg from '@/assets/queen-thumbnail.png';
+import queenImg from '@/assets/queen-thumbnail-glow.png';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LanternFlowModalProps {
@@ -532,36 +532,52 @@ const LanternFlowModal = ({
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center"
                 >
-                  {/* Queen Image */}
+                  {/* Queen Image with Glow Effect */}
                   <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="mb-6"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1, duration: 0.5 }}
+                    className="relative mb-4"
                   >
+                    {/* Radial glow behind queen */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <motion.div
+                        className="w-72 h-72 rounded-full"
+                        style={{
+                          background: 'radial-gradient(circle, rgba(255,223,100,0.4) 0%, rgba(255,200,50,0.2) 40%, transparent 70%)'
+                        }}
+                        animate={{
+                          scale: [1, 1.1, 1],
+                          opacity: [0.8, 1, 0.8]
+                        }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      />
+                    </div>
                     <img
                       src={queenImg}
                       alt={t.hero.queenAlt}
-                      className="w-48 h-auto mx-auto drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                      className="relative w-64 h-auto mx-auto"
                     />
                   </motion.div>
 
-                  <motion.div
-                    className="text-6xl mb-4"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                  {/* Thank you text */}
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="text-foreground/60 text-sm mb-2"
                   >
-                    ​
-                  </motion.div>
-                  <h3 className="text-2xl md:text-3xl font-semibold text-gold mb-4">
                     {t.lanternFlow.thankYou}
-                  </h3>
-                  <p className="text-foreground/70 mb-2">
-                    {t.lanternFlow.yourLanternFrom}{selectedProvince}
-                  </p>
-                  <p className="text-foreground/50 text-sm mb-6">
-                    {t.lanternFlow.hasRisen}
-                  </p>
+                  </motion.p>
+                  
+                  <motion.h3
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="text-xl md:text-2xl font-semibold text-gold mb-4"
+                  >
+                    {t.lanternFlow.yourLanternFrom}{selectedProvince} {t.lanternFlow.hasRisen}
+                  </motion.h3>
 
                   {/* Share Buttons */}
                   <motion.div
@@ -571,48 +587,43 @@ const LanternFlowModal = ({
                     className="mb-6"
                   >
                     <p className="text-foreground/50 text-sm mb-3">{t.lanternFlow.shareTo}</p>
-                    <div className="flex items-center justify-center gap-4">
+                    <div className="flex items-center justify-center gap-3">
                       <motion.a
                         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(t.lanternFlow.shareText)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-12 h-12 bg-[#1877F2] rounded-full flex items-center justify-center text-white hover:brightness-110 transition-all"
-                        whileHover={{ scale: 1.1 }}
+                        className="flex items-center gap-2 px-5 py-2.5 bg-[#1877F2] rounded-full text-white text-sm font-medium hover:brightness-110 transition-all"
+                        whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <Facebook className="w-6 h-6" />
-                      </motion.a>
-                      <motion.a
-                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(t.lanternFlow.shareText)}&url=${encodeURIComponent(window.location.href)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 bg-[#000000] rounded-full flex items-center justify-center text-white hover:brightness-110 transition-all"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Twitter className="w-6 h-6" />
+                        <Facebook className="w-5 h-5" />
+                        <span>Facebook</span>
                       </motion.a>
                       <motion.a
                         href={`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(t.lanternFlow.shareText)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-12 h-12 bg-[#00B900] rounded-full flex items-center justify-center text-white hover:brightness-110 transition-all"
-                        whileHover={{ scale: 1.1 }}
+                        className="flex items-center gap-2 px-5 py-2.5 bg-[#00B900] rounded-full text-white text-sm font-medium hover:brightness-110 transition-all"
+                        whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
                         </svg>
+                        <span>LINE</span>
                       </motion.a>
                     </div>
                   </motion.div>
 
-                  <button
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.6 }}
                     onClick={onClose}
-                    className="px-6 py-3 border border-gold text-gold hover:bg-gold/10 rounded-full transition-colors"
+                    className="w-full max-w-xs px-6 py-3 bg-gradient-to-r from-gold-dark via-gold to-gold-light text-primary-foreground font-medium rounded-full transition-colors"
                   >
                     {t.lanternFlow.close}
-                  </button>
+                  </motion.button>
                 </motion.div>
               )}
             </AnimatePresence>
