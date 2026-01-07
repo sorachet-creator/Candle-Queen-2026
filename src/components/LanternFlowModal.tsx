@@ -405,7 +405,7 @@ const LanternFlowModal = ({
                     {currentQuestion.question}
                   </h3>
                   <p className="text-foreground/70 text-sm mb-4">
-                    {t.lanternFlow.province}{selectedProvince}
+                    {selectedRegion === 'international' ? selectedProvince : `${t.lanternFlow.province}${selectedProvince}`}
                   </p>
 
                   {isWrongAnswer && (
