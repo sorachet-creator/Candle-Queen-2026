@@ -313,7 +313,7 @@ const LanternFlowModal = ({
                   className="text-center"
                 >
                   <MapPin className="w-12 h-12 text-gold mx-auto mb-4" />
-                  <h3 className="text-2xl md:text-3xl font-semibold text-gold mb-2">
+                  <h3 className="text-2xl md:text-3xl font-semibold gradient-gold-text mb-2">
                     {t.lanternFlow.selectRegion}
                   </h3>
                   <p className="text-foreground/70 mb-8">
@@ -354,7 +354,7 @@ const LanternFlowModal = ({
                   </button>
 
                   <MapPin className="w-12 h-12 text-gold mx-auto mb-4" />
-                  <h3 className="text-2xl md:text-3xl font-semibold text-gold mb-2">
+                  <h3 className="text-2xl md:text-3xl font-semibold gradient-gold-text mb-2">
                     {t.lanternFlow.selectProvince}
                   </h3>
                   <p className="text-foreground/70 mb-6">
@@ -401,7 +401,7 @@ const LanternFlowModal = ({
                   </button>
 
                   <div className="text-4xl mb-4">📝</div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-gold mb-2">
+                  <h3 className="text-xl md:text-2xl font-semibold gradient-gold-text mb-2">
                     {currentQuestion.question}
                   </h3>
                   <p className="text-foreground/70 text-sm mb-4">
@@ -501,7 +501,7 @@ const LanternFlowModal = ({
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                     >
-                      <h3 className="text-2xl md:text-3xl font-semibold text-gold mb-4">
+                      <h3 className="text-2xl md:text-3xl font-semibold gradient-gold-text mb-4">
                         {t.lanternFlow.payTribute}
                       </h3>
                       <p className="text-foreground/70 mb-2">
@@ -574,7 +574,7 @@ const LanternFlowModal = ({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
-                    className="text-xl md:text-2xl font-semibold text-gold mb-4"
+                    className="text-xl md:text-2xl font-semibold gradient-gold-text mb-4"
                   >
                     {t.lanternFlow.yourLanternFrom}{selectedProvince} {t.lanternFlow.hasRisen}
                   </motion.h3>

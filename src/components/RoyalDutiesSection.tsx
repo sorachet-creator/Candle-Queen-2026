@@ -76,7 +76,7 @@ const ProjectCard = ({ project, index, image, isReversed, yearLabel, readMoreLab
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gold mb-4 leading-tight">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold gradient-gold-text mb-4 leading-tight">
             {project.title}
           </h3>
           <p className="text-foreground/70 text-sm md:text-base leading-relaxed mb-6">
@@ -113,7 +113,7 @@ const RoyalDutiesSection = () => {
           <span className="text-muted-foreground uppercase tracking-widest text-sm">
             {t.royalDuties.subtitle}
           </span>
-          <h2 className="text-3xl md:text-4xl font-semibold text-gold mt-4 mb-6">
+          <h2 className="text-3xl md:text-4xl font-semibold gradient-gold-text mt-4 mb-6">
             {t.royalDuties.title}
           </h2>
           <p className="text-foreground/70 max-w-2xl mx-auto">

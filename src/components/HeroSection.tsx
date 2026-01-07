@@ -73,7 +73,7 @@ const HeroSection = () => {
             </AnimatePresence>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-semibold text-gold mb-6 text-shadow-gold">
+          <h2 className="text-3xl md:text-5xl font-semibold gradient-gold-text mb-6 text-shadow-gold">
             {t.hero.title}
           </h2>
 
