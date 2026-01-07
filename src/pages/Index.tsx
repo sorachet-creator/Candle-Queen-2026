@@ -18,7 +18,7 @@ const Index = () => {
       
       <footer className="relative z-10 py-8 border-t border-border/30 text-center">
         <p className="text-muted-foreground text-sm">
-          © 2025 สมาคมเทคโนโลยีเพื่อการตลาด (Technology for Marketing Association)
+          © 2026 สมาคมเทคโนโลยีเพื่อการตลาด (Technology for Marketing Association)
         </p>
         <p className="text-muted-foreground text-sm mt-1">
           เว็บไซต์นี้จัดทำขึ้นเพื่อเป็นการเฉลิมพระเกียรติ
