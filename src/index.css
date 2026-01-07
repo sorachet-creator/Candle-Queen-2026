@@ -147,14 +147,30 @@
 
   .gradient-gold-text {
     background: linear-gradient(
-      135deg,
-      hsl(var(--gold-light)) 0%,
+      90deg,
+      hsl(var(--gold-dark)) 0%,
+      hsl(var(--gold-light)) 25%,
       hsl(var(--gold)) 50%,
+      hsl(var(--gold-light)) 75%,
       hsl(var(--gold-dark)) 100%
     );
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: shimmer-text 4s ease-in-out infinite;
+  }
+
+  @keyframes shimmer-text {
+    0% {
+      background-position: 100% 0;
+    }
+    50% {
+      background-position: 0% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
   }
 
   .glow-gold {
