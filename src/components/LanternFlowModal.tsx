@@ -541,19 +541,12 @@ const LanternFlowModal = ({
                   {/* Floating Lanterns Background - Random positions, sizes and angles */}
                   <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
                     {[
-                      { left: '5%', top: '5%', size: 'w-10 md:w-14', angle: -15 },
-                      { left: '15%', top: '15%', size: 'w-14 md:w-20', angle: 10 },
-                      { left: '8%', top: '35%', size: 'w-12 md:w-16', angle: -8 },
-                      { left: '25%', top: '8%', size: 'w-8 md:w-12', angle: 20 },
-                      { left: '35%', top: '20%', size: 'w-10 md:w-14', angle: -5 },
-                      { left: '50%', top: '5%', size: 'w-12 md:w-18', angle: 12 },
-                      { left: '60%', top: '15%', size: 'w-8 md:w-12', angle: -18 },
-                      { left: '70%', top: '8%', size: 'w-14 md:w-20', angle: 8 },
-                      { left: '80%', top: '20%', size: 'w-10 md:w-14', angle: -12 },
-                      { left: '88%', top: '10%', size: 'w-12 md:w-16', angle: 15 },
-                      { left: '75%', top: '35%', size: 'w-8 md:w-12', angle: -20 },
-                      { left: '20%', top: '50%', size: 'w-6 md:w-10', angle: 25 },
-                      { left: '85%', top: '45%', size: 'w-10 md:w-14', angle: -10 },
+                      { left: '8%', top: '10%', size: 'w-12 md:w-16', angle: -15 },
+                      { left: '25%', top: '5%', size: 'w-10 md:w-14', angle: 12 },
+                      { left: '50%', top: '8%', size: 'w-14 md:w-20', angle: -8 },
+                      { left: '72%', top: '12%', size: 'w-10 md:w-14', angle: 18 },
+                      { left: '88%', top: '8%', size: 'w-12 md:w-16', angle: -12 },
+                      { left: '15%', top: '35%', size: 'w-8 md:w-12', angle: 10 },
                     ].map((lantern, i) => (
                       <motion.img
                         key={i}
