@@ -6,6 +6,8 @@ import queenImg from '@/assets/queen-thumbnail-glow.png';
 import queenBeforeLanternImg from '@/assets/queen-before-lantern.png';
 import moonSceneImg from '@/assets/moon-scene.png';
 import queenOverlayImg from '@/assets/queen-overlay.png';
+import queenAfterLanternImg from '@/assets/queen-after-lantern.png';
+import floatingLanternImg from '@/assets/floating-lantern.png';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LanternFlowModalProps {
@@ -557,14 +559,41 @@ const LanternFlowModal = ({
                   key="success"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="text-center"
+                  className="text-center relative"
                 >
+                  {/* Floating Lanterns Background */}
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    {[...Array(8)].map((_, i) => (
+                      <motion.img
+                        key={i}
+                        src={floatingLanternImg}
+                        alt=""
+                        className="absolute w-12 md:w-16 opacity-60"
+                        style={{
+                          left: `${10 + (i % 4) * 22}%`,
+                          top: `${20 + Math.floor(i / 4) * 40}%`,
+                        }}
+                        initial={{ y: 0, opacity: 0 }}
+                        animate={{
+                          y: [0, -20, 0, -15, 0],
+                          opacity: [0.4, 0.7, 0.5, 0.8, 0.4],
+                        }}
+                        transition={{
+                          duration: 4 + i * 0.5,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                          delay: i * 0.3,
+                        }}
+                      />
+                    ))}
+                  </div>
+
                   {/* Queen Image with Glow Effect */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1, duration: 0.5 }}
-                    className="relative mb-4"
+                    className="relative mb-4 z-10"
                   >
                     {/* Radial glow behind queen */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -581,9 +610,9 @@ const LanternFlowModal = ({
                       />
                     </div>
                     <img
-                      src={queenImg}
+                      src={queenAfterLanternImg}
                       alt={t.hero.queenAlt}
-                      className="relative w-64 h-auto mx-auto"
+                      className="relative w-72 md:w-80 h-auto mx-auto"
                     />
                   </motion.div>
 
