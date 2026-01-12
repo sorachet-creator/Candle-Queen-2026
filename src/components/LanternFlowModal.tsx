@@ -8,6 +8,7 @@ import moonSceneImg from '@/assets/moon-scene.png';
 import queenOverlayImg from '@/assets/queen-overlay.png';
 import queenAfterLanternImg from '@/assets/queen-after-lantern.png';
 import floatingLanternImg from '@/assets/floating-lantern.png';
+import lanternReleaseImg from '@/assets/lantern-release.png';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LanternFlowModalProps {
@@ -469,31 +470,7 @@ const LanternFlowModal = ({
                     </button>
                   )}
 
-                  {/* Moon Scene with Queen Overlay Animation */}
-                  {!isReleased && (
-                    <div className="relative w-64 h-72 md:w-80 md:h-96 mx-auto mb-6">
-                      {/* Moon Background */}
-                      <motion.img
-                        src={moonSceneImg}
-                        alt="ฉากดวงจันทร์"
-                        className="absolute inset-0 w-full h-full object-contain"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, ease: 'easeOut' }}
-                      />
-                      {/* Queen Overlay - fades in after moon */}
-                      <motion.img
-                        src={queenOverlayImg}
-                        alt="สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ"
-                        className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.2, delay: 0.8, ease: 'easeOut' }}
-                      />
-                    </div>
-                  )}
-
-                  {/* Lantern */}
+                  {/* Lantern - uses new lantern image, no queen */}
                   <motion.div
                     className="relative mx-auto mb-8"
                     animate={
@@ -508,9 +485,9 @@ const LanternFlowModal = ({
                     }
                   >
                     <img
-                      src={lanternImg}
+                      src={lanternReleaseImg}
                       alt="Lantern"
-                      className="w-32 h-auto mx-auto drop-shadow-[0_0_30px_rgba(212,175,55,0.8)]"
+                      className="w-40 md:w-48 h-auto mx-auto drop-shadow-[0_0_30px_rgba(212,175,55,0.8)]"
                     />
                     <motion.div
                       className="absolute inset-0 bg-gold/20 blur-3xl rounded-full"
