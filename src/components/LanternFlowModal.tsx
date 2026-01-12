@@ -561,22 +561,22 @@ const LanternFlowModal = ({
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center relative"
                 >
-                  {/* Floating Lanterns Background - Random positions and sizes */}
+                  {/* Floating Lanterns Background - Random positions, sizes and angles */}
                   <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
                     {[
-                      { left: '5%', top: '5%', size: 'w-10 md:w-14' },
-                      { left: '15%', top: '15%', size: 'w-14 md:w-20' },
-                      { left: '8%', top: '35%', size: 'w-12 md:w-16' },
-                      { left: '25%', top: '8%', size: 'w-8 md:w-12' },
-                      { left: '35%', top: '20%', size: 'w-10 md:w-14' },
-                      { left: '50%', top: '5%', size: 'w-12 md:w-18' },
-                      { left: '60%', top: '15%', size: 'w-8 md:w-12' },
-                      { left: '70%', top: '8%', size: 'w-14 md:w-20' },
-                      { left: '80%', top: '20%', size: 'w-10 md:w-14' },
-                      { left: '88%', top: '10%', size: 'w-12 md:w-16' },
-                      { left: '75%', top: '35%', size: 'w-8 md:w-12' },
-                      { left: '20%', top: '50%', size: 'w-6 md:w-10' },
-                      { left: '85%', top: '45%', size: 'w-10 md:w-14' },
+                      { left: '5%', top: '5%', size: 'w-10 md:w-14', angle: -15 },
+                      { left: '15%', top: '15%', size: 'w-14 md:w-20', angle: 10 },
+                      { left: '8%', top: '35%', size: 'w-12 md:w-16', angle: -8 },
+                      { left: '25%', top: '8%', size: 'w-8 md:w-12', angle: 20 },
+                      { left: '35%', top: '20%', size: 'w-10 md:w-14', angle: -5 },
+                      { left: '50%', top: '5%', size: 'w-12 md:w-18', angle: 12 },
+                      { left: '60%', top: '15%', size: 'w-8 md:w-12', angle: -18 },
+                      { left: '70%', top: '8%', size: 'w-14 md:w-20', angle: 8 },
+                      { left: '80%', top: '20%', size: 'w-10 md:w-14', angle: -12 },
+                      { left: '88%', top: '10%', size: 'w-12 md:w-16', angle: 15 },
+                      { left: '75%', top: '35%', size: 'w-8 md:w-12', angle: -20 },
+                      { left: '20%', top: '50%', size: 'w-6 md:w-10', angle: 25 },
+                      { left: '85%', top: '45%', size: 'w-10 md:w-14', angle: -10 },
                     ].map((lantern, i) => (
                       <motion.img
                         key={i}
@@ -587,16 +587,17 @@ const LanternFlowModal = ({
                           left: lantern.left,
                           top: lantern.top,
                         }}
-                        initial={{ y: 0, opacity: 0 }}
+                        initial={{ y: 0, opacity: 0, rotate: lantern.angle }}
                         animate={{
-                          y: [0, -15 - Math.random() * 10, 0, -10 - Math.random() * 8, 0],
+                          y: [0, -15 - (i % 3) * 5, 0, -10 - (i % 4) * 3, 0],
                           opacity: [0.5, 0.8, 0.6, 0.9, 0.5],
+                          rotate: [lantern.angle, lantern.angle + 5, lantern.angle - 3, lantern.angle + 2, lantern.angle],
                         }}
                         transition={{
-                          duration: 3 + Math.random() * 2,
+                          duration: 3 + (i % 3) * 0.8,
                           repeat: Infinity,
                           ease: 'easeInOut',
-                          delay: i * 0.2,
+                          delay: i * 0.15,
                         }}
                       />
                     ))}
