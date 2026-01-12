@@ -4,6 +4,8 @@ import { X, ChevronRight, ChevronLeft, MapPin, Check, Facebook, Twitter } from '
 import lanternImg from '@/assets/lantern.png';
 import queenImg from '@/assets/queen-thumbnail-glow.png';
 import queenBeforeLanternImg from '@/assets/queen-before-lantern.png';
+import moonSceneImg from '@/assets/moon-scene.png';
+import queenOverlayImg from '@/assets/queen-overlay.png';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LanternFlowModalProps {
@@ -465,13 +467,26 @@ const LanternFlowModal = ({
                     </button>
                   )}
 
-                  {/* Queen Image Before Lantern */}
+                  {/* Moon Scene with Queen Overlay Animation */}
                   {!isReleased && (
-                    <div className="relative w-48 h-56 md:w-56 md:h-64 mx-auto mb-6">
-                      <img
-                        src={queenBeforeLanternImg}
+                    <div className="relative w-64 h-72 md:w-80 md:h-96 mx-auto mb-6">
+                      {/* Moon Background */}
+                      <motion.img
+                        src={moonSceneImg}
+                        alt="ฉากดวงจันทร์"
+                        className="absolute inset-0 w-full h-full object-contain"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1, ease: 'easeOut' }}
+                      />
+                      {/* Queen Overlay - fades in after moon */}
+                      <motion.img
+                        src={queenOverlayImg}
                         alt="สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ"
-                        className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+                        className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.2, delay: 0.8, ease: 'easeOut' }}
                       />
                     </div>
                   )}
