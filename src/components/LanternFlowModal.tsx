@@ -561,28 +561,42 @@ const LanternFlowModal = ({
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center relative"
                 >
-                  {/* Floating Lanterns Background */}
-                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {[...Array(8)].map((_, i) => (
+                  {/* Floating Lanterns Background - Random positions and sizes */}
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+                    {[
+                      { left: '5%', top: '5%', size: 'w-10 md:w-14' },
+                      { left: '15%', top: '15%', size: 'w-14 md:w-20' },
+                      { left: '8%', top: '35%', size: 'w-12 md:w-16' },
+                      { left: '25%', top: '8%', size: 'w-8 md:w-12' },
+                      { left: '35%', top: '20%', size: 'w-10 md:w-14' },
+                      { left: '50%', top: '5%', size: 'w-12 md:w-18' },
+                      { left: '60%', top: '15%', size: 'w-8 md:w-12' },
+                      { left: '70%', top: '8%', size: 'w-14 md:w-20' },
+                      { left: '80%', top: '20%', size: 'w-10 md:w-14' },
+                      { left: '88%', top: '10%', size: 'w-12 md:w-16' },
+                      { left: '75%', top: '35%', size: 'w-8 md:w-12' },
+                      { left: '20%', top: '50%', size: 'w-6 md:w-10' },
+                      { left: '85%', top: '45%', size: 'w-10 md:w-14' },
+                    ].map((lantern, i) => (
                       <motion.img
                         key={i}
                         src={floatingLanternImg}
                         alt=""
-                        className="absolute w-12 md:w-16 opacity-60"
+                        className={`absolute ${lantern.size} opacity-70`}
                         style={{
-                          left: `${10 + (i % 4) * 22}%`,
-                          top: `${20 + Math.floor(i / 4) * 40}%`,
+                          left: lantern.left,
+                          top: lantern.top,
                         }}
                         initial={{ y: 0, opacity: 0 }}
                         animate={{
-                          y: [0, -20, 0, -15, 0],
-                          opacity: [0.4, 0.7, 0.5, 0.8, 0.4],
+                          y: [0, -15 - Math.random() * 10, 0, -10 - Math.random() * 8, 0],
+                          opacity: [0.5, 0.8, 0.6, 0.9, 0.5],
                         }}
                         transition={{
-                          duration: 4 + i * 0.5,
+                          duration: 3 + Math.random() * 2,
                           repeat: Infinity,
                           ease: 'easeInOut',
-                          delay: i * 0.3,
+                          delay: i * 0.2,
                         }}
                       />
                     ))}
