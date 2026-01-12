@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight, ChevronLeft, MapPin, Check, Facebook, Twitter } from 'lucide-react';
 import lanternImg from '@/assets/lantern.png';
 import queenImg from '@/assets/queen-thumbnail-glow.png';
+import queenBeforeLanternImg from '@/assets/queen-before-lantern.png';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LanternFlowModalProps {
@@ -462,6 +463,17 @@ const LanternFlowModal = ({
                       <ChevronLeft className="w-5 h-5" />
                       <span>{t.lanternFlow.back}</span>
                     </button>
+                  )}
+
+                  {/* Queen Image Before Lantern */}
+                  {!isReleased && (
+                    <div className="relative w-48 h-56 md:w-56 md:h-64 mx-auto mb-6">
+                      <img
+                        src={queenBeforeLanternImg}
+                        alt="สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ"
+                        className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+                      />
+                    </div>
                   )}
 
                   {/* Lantern */}
