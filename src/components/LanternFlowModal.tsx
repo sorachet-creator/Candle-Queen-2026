@@ -538,7 +538,7 @@ const LanternFlowModal = ({
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center relative"
                 >
-                  {/* Floating Lanterns Background - Random positions, sizes and angles */}
+                  {/* Floating Lanterns Background - Random positions, sizes and angles with glow */}
                   <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
                     {[
                       { left: '10%', top: '10%', size: 'w-12 md:w-16', angle: -12 },
@@ -547,28 +547,39 @@ const LanternFlowModal = ({
                       { left: '70%', top: '5%', size: 'w-10 md:w-14', angle: -8 },
                       { left: '90%', top: '10%', size: 'w-12 md:w-16', angle: 12 },
                     ].map((lantern, i) => (
-                      <motion.img
+                      <motion.div
                         key={i}
-                        src={floatingLanternImg}
-                        alt=""
-                        className={`absolute ${lantern.size} opacity-70`}
+                        className="absolute"
                         style={{
                           left: lantern.left,
                           top: lantern.top,
                         }}
                         initial={{ y: 0, opacity: 0, rotate: lantern.angle }}
                         animate={{
-                          y: [0, -15 - (i % 3) * 5, 0, -10 - (i % 4) * 3, 0],
-                          opacity: [0.5, 0.8, 0.6, 0.9, 0.5],
-                          rotate: [lantern.angle, lantern.angle + 5, lantern.angle - 3, lantern.angle + 2, lantern.angle],
+                          y: [0, -8, -3, -12, -5, 0],
+                          opacity: [0.7, 0.9, 0.8, 1, 0.85, 0.7],
+                          rotate: [lantern.angle, lantern.angle + 2, lantern.angle - 1, lantern.angle + 3, lantern.angle - 2, lantern.angle],
                         }}
                         transition={{
-                          duration: 3 + (i % 3) * 0.8,
+                          duration: 6 + i * 0.5,
                           repeat: Infinity,
                           ease: 'easeInOut',
-                          delay: i * 0.15,
+                          delay: i * 0.3,
                         }}
-                      />
+                      >
+                        <img
+                          src={floatingLanternImg}
+                          alt=""
+                          className={`${lantern.size} drop-shadow-[0_0_20px_rgba(255,180,80,0.8)] filter brightness-110`}
+                        />
+                        {/* Glow effect behind lantern */}
+                        <div 
+                          className="absolute inset-0 rounded-full blur-xl opacity-60"
+                          style={{
+                            background: 'radial-gradient(circle, rgba(255,200,100,0.6) 0%, rgba(255,150,50,0.3) 50%, transparent 70%)',
+                          }}
+                        />
+                      </motion.div>
                     ))}
                   </div>
 
