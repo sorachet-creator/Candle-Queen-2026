@@ -541,12 +541,11 @@ const LanternFlowModal = ({
                   {/* Floating Lanterns Background - Random positions, sizes and angles */}
                   <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
                     {[
-                      { left: '8%', top: '10%', size: 'w-12 md:w-16', angle: -15 },
-                      { left: '25%', top: '5%', size: 'w-10 md:w-14', angle: 12 },
-                      { left: '50%', top: '8%', size: 'w-14 md:w-20', angle: -8 },
-                      { left: '72%', top: '12%', size: 'w-10 md:w-14', angle: 18 },
-                      { left: '88%', top: '8%', size: 'w-12 md:w-16', angle: -12 },
-                      { left: '15%', top: '35%', size: 'w-8 md:w-12', angle: 10 },
+                      { left: '10%', top: '10%', size: 'w-12 md:w-16', angle: -12 },
+                      { left: '30%', top: '5%', size: 'w-10 md:w-14', angle: 8 },
+                      { left: '50%', top: '3%', size: 'w-14 md:w-20', angle: 0 },
+                      { left: '70%', top: '5%', size: 'w-10 md:w-14', angle: -8 },
+                      { left: '90%', top: '10%', size: 'w-12 md:w-16', angle: 12 },
                     ].map((lantern, i) => (
                       <motion.img
                         key={i}
