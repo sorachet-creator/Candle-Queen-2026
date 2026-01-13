@@ -40,10 +40,12 @@ const HeroSection = () => {
         >
           {/* Queen Image */}
           <div className="relative w-64 h-72 md:w-80 md:h-96 mx-auto mb-8">
+            {/* Golden glow effect */}
+            <div className="absolute inset-0 bg-gradient-radial from-gold/40 via-gold/20 to-transparent blur-3xl animate-pulse" />
             <img
               src={queenHeroImg}
               alt={t.hero.queenAlt}
-              className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+              className="relative w-full h-full object-contain drop-shadow-[0_0_40px_rgba(212,175,55,0.6)] [filter:drop-shadow(0_0_20px_rgba(212,175,55,0.4))_drop-shadow(0_0_60px_rgba(212,175,55,0.3))]"
             />
           </div>
 
