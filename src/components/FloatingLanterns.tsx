@@ -16,13 +16,13 @@ const FloatingLanterns = () => {
   useEffect(() => {
     const generateLanterns = () => {
       const newLanterns: Lantern[] = [];
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 10; i++) {
         newLanterns.push({
           id: i,
           x: Math.random() * 100,
           delay: Math.random() * 10,
           duration: 15 + Math.random() * 10,
-          size: 30 + Math.random() * 40,
+          size: 20 + Math.random() * 20,
         });
       }
       setLanterns(newLanterns);
