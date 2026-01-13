@@ -21,7 +21,7 @@ const FloatingLanterns = () => {
           id: i,
           x: Math.random() * 100,
           delay: Math.random() * 10,
-          duration: 15 + Math.random() * 10,
+          duration: 30 + Math.random() * 20,
           size: 20 + Math.random() * 20,
         });
       }
