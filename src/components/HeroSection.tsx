@@ -6,18 +6,12 @@ import LanternFlowModal from './LanternFlowModal';
 import ProvinceStatsModal from './ProvinceStatsModal';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-import queenFrame1 from '@/assets/queen-frame-1.png';
-import queenFrame2 from '@/assets/queen-frame-2.png';
-import queenFrame3 from '@/assets/queen-frame-3.png';
-import queenFrame4 from '@/assets/queen-frame-4.png';
-
-const queenImages = [queenFrame1, queenFrame2, queenFrame3, queenFrame4];
+import queenHeroImg from '@/assets/queen-hero.png';
 
 const HeroSection = () => {
   const [count, setCount] = useState(86080000);
   const [isLanternModalOpen, setIsLanternModalOpen] = useState(false);
   const [isProvinceModalOpen, setIsProvinceModalOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -25,19 +19,6 @@ const HeroSection = () => {
       setCount((prev) => prev + Math.floor(Math.random() * 10));
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const imageInterval = setInterval(() => {
-      setCurrentImageIndex((prev) => {
-        let nextIndex;
-        do {
-          nextIndex = Math.floor(Math.random() * queenImages.length);
-        } while (nextIndex === prev && queenImages.length > 1);
-        return nextIndex;
-      });
-    }, 4000);
-    return () => clearInterval(imageInterval);
   }, []);
 
   const handleLanternComplete = () => {
@@ -57,20 +38,13 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          {/* Queen Image Slideshow */}
-          <div className="relative w-48 h-56 md:w-64 md:h-72 mx-auto mb-8">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={currentImageIndex}
-                src={queenImages[currentImageIndex]}
-                alt={t.hero.queenAlt}
-                className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.8 }}
-              />
-            </AnimatePresence>
+          {/* Queen Image */}
+          <div className="relative w-64 h-72 md:w-80 md:h-96 mx-auto mb-8">
+            <img
+              src={queenHeroImg}
+              alt={t.hero.queenAlt}
+              className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+            />
           </div>
 
           <h2 className="text-3xl md:text-5xl font-semibold gradient-gold-text mb-6 text-shadow-gold">
