@@ -28,100 +28,118 @@ const provincesByRegion: Record<string, string[]> = {
   south: ['ภูเก็ต', 'กระบี่', 'พังงา', 'สุราษฎร์ธานี', 'นครศรีธรรมราช', 'สงขลา', 'ปัตตานี', 'ยะลา', 'นราธิวาส', 'ตรัง', 'พัทลุง', 'สตูล', 'ชุมพร', 'ระนอง']
 };
 
-// Quiz questions based on real royal duties
+// Quiz questions focused on project benefits and youth-relevant topics (environment, inequality)
 const quizQuestions = {
   TH: [{
     id: 1,
-    question: 'มูลนิธิส่งเสริมศิลปาชีพฯ (SUPPORT Foundation) ก่อตั้งขึ้นเมื่อปีใด?',
-    options: ['พ.ศ. 2515', 'พ.ศ. 2519', 'พ.ศ. 2525', 'พ.ศ. 2530'],
-    correctAnswer: 'พ.ศ. 2519'
+    question: 'โครงการป่ารักน้ำช่วยลดปัญหาสิ่งแวดล้อมด้านใดมากที่สุด?',
+    options: ['มลพิษทางอากาศ', 'การขาดแคลนน้ำและน้ำท่วม', 'ขยะพลาสติก', 'โลกร้อน'],
+    correctAnswer: 'การขาดแคลนน้ำและน้ำท่วม',
+    benefit: 'ป่าต้นน้ำช่วยซับน้ำฝนและปล่อยน้ำอย่างช้าๆ ลดน้ำท่วมและภัยแล้ง'
   }, {
     id: 2,
-    question: 'โครงการป่ารักน้ำ มีวัตถุประสงค์หลักเพื่ออะไร?',
-    options: ['ส่งเสริมการท่องเที่ยว', 'ฟื้นฟูสภาพป่าต้นน้ำ', 'สร้างเขื่อนกั้นน้ำ', 'ปลูกพืชเศรษฐกิจ'],
-    correctAnswer: 'ฟื้นฟูสภาพป่าต้นน้ำ'
+    question: 'มูลนิธิส่งเสริมศิลปาชีพฯ ช่วยลดความเหลื่อมล้ำอย่างไร?',
+    options: ['แจกเงินให้ชาวบ้าน', 'สร้างอาชีพและรายได้ให้ชุมชนยากจน', 'ย้ายคนเข้าเมือง', 'ให้ทุนการศึกษา'],
+    correctAnswer: 'สร้างอาชีพและรายได้ให้ชุมชนยากจน',
+    benefit: 'ชาวบ้านมีอาชีพทอผ้า งานหัตถกรรม สร้างรายได้โดยไม่ต้องย้ายถิ่น'
   }, {
     id: 3,
-    question: 'โครงการฟาร์มตัวอย่างเริ่มดำเนินการในปีใด?',
-    options: ['พ.ศ. 2535', 'พ.ศ. 2538', 'พ.ศ. 2541', 'พ.ศ. 2545'],
-    correctAnswer: 'พ.ศ. 2541'
+    question: 'โครงการคืนช้างสู่ธรรมชาติมีประโยชน์ต่อระบบนิเวศอย่างไร?',
+    options: ['ดึงดูดนักท่องเที่ยว', 'ช้างช่วยกระจายเมล็ดพันธุ์และสร้างเส้นทางน้ำ', 'ลดจำนวนช้างที่มากเกินไป', 'ฝึกช้างทำงาน'],
+    correctAnswer: 'ช้างช่วยกระจายเมล็ดพันธุ์และสร้างเส้นทางน้ำ',
+    benefit: 'ช้างเป็น "วิศวกรของป่า" ช่วยรักษาความหลากหลายทางชีวภาพ'
   }, {
     id: 4,
-    question: 'โครงการคืนช้างสู่ธรรมชาติมีจุดประสงค์หลักคืออะไร?',
-    options: ['ฝึกช้างเพื่อการท่องเที่ยว', 'ฟื้นฟูประชากรช้างป่าไทย', 'ส่งออกช้างไปต่างประเทศ', 'เลี้ยงช้างเพื่อการเกษตร'],
-    correctAnswer: 'ฟื้นฟูประชากรช้างป่าไทย'
+    question: 'โครงการอนุรักษ์เต่าทะเลที่เกาะมันในช่วยแก้ปัญหาอะไร?',
+    options: ['เต่าทะเลใกล้สูญพันธุ์', 'การท่องเที่ยวไม่เติบโต', 'ชาวประมงตกงาน', 'ขาดแหล่งอาหารทะเล'],
+    correctAnswer: 'เต่าทะเลใกล้สูญพันธุ์',
+    benefit: 'เต่าทะเลช่วยรักษาสมดุลของหญ้าทะเลและแนวปะการัง'
   }, {
     id: 5,
-    question: 'สมเด็จพระนางเจ้าสิริกิติ์ฯ พระราชทานเกาะใดเป็นสถานที่อนุรักษ์พันธุ์เต่าทะเล?',
-    options: ['เกาะสมุย', 'เกาะมันใน', 'เกาะเต่า', 'เกาะพีพี'],
-    correctAnswer: 'เกาะมันใน'
+    question: 'โครงการฟาร์มตัวอย่างช่วยเรื่องความมั่นคงทางอาหารอย่างไร?',
+    options: ['นำเข้าอาหารจากต่างประเทศ', 'สอนเกษตรกรผลิตอาหารปลอดภัยและพึ่งพาตนเอง', 'แจกอาหารฟรี', 'สร้างซูเปอร์มาร์เก็ต'],
+    correctAnswer: 'สอนเกษตรกรผลิตอาหารปลอดภัยและพึ่งพาตนเอง',
+    benefit: 'ชุมชนสามารถผลิตอาหารเองได้อย่างยั่งยืน'
   }, {
     id: 6,
-    question: 'การอนุรักษ์โขนได้รับการสืบสานจากสมเด็จพระนางเจ้าสิริกิติ์ฯ ตั้งแต่ปีใด?',
-    options: ['พ.ศ. 2540', 'พ.ศ. 2543', 'พ.ศ. 2546', 'พ.ศ. 2550'],
-    correctAnswer: 'พ.ศ. 2546'
+    question: 'สถานีพัฒนาเกษตรที่สูงช่วยลดปัญหาสิ่งแวดล้อมบนภูเขาอย่างไร?',
+    options: ['สร้างถนนขึ้นดอย', 'ส่งเสริมเกษตรทดแทนการทำไร่เลื่อนลอย', 'ย้ายชาวเขาลงมาอยู่เมือง', 'ปลูกพืชอุตสาหกรรม'],
+    correctAnswer: 'ส่งเสริมเกษตรทดแทนการทำไร่เลื่อนลอย',
+    benefit: 'ลดการตัดไม้ทำลายป่าต้นน้ำ รักษาระบบนิเวศบนภูเขา'
   }],
   EN: [{
     id: 1,
-    question: 'When was the SUPPORT Foundation established?',
-    options: ['1972', '1976', '1982', '1987'],
-    correctAnswer: '1976'
+    question: 'What environmental problem does the Forest Loves Water project address most?',
+    options: ['Air pollution', 'Water scarcity and flooding', 'Plastic waste', 'Global warming'],
+    correctAnswer: 'Water scarcity and flooding',
+    benefit: 'Watershed forests absorb rainwater and release it slowly, reducing floods and droughts'
   }, {
     id: 2,
-    question: 'What is the main objective of the Forest Loves Water Project?',
-    options: ['Promote tourism', 'Restore watershed forests', 'Build dams', 'Plant commercial crops'],
-    correctAnswer: 'Restore watershed forests'
+    question: 'How does the SUPPORT Foundation reduce inequality?',
+    options: ['Gives money to villagers', 'Creates jobs and income for poor communities', 'Moves people to cities', 'Provides scholarships'],
+    correctAnswer: 'Creates jobs and income for poor communities',
+    benefit: 'Villagers can earn income from weaving and handicrafts without migrating'
   }, {
     id: 3,
-    question: 'When did the Model Farm Project begin?',
-    options: ['1992', '1995', '1998', '2002'],
-    correctAnswer: '1998'
+    question: 'How does the Elephant Reintroduction project benefit the ecosystem?',
+    options: ['Attracts tourists', 'Elephants spread seeds and create water paths', 'Reduces elephant overpopulation', 'Trains elephants for work'],
+    correctAnswer: 'Elephants spread seeds and create water paths',
+    benefit: 'Elephants are "forest engineers" that maintain biodiversity'
   }, {
     id: 4,
-    question: 'What is the main purpose of the Elephant Reintroduction Project?',
-    options: ['Train elephants for tourism', 'Restore Thai wild elephant population', 'Export elephants abroad', 'Raise elephants for agriculture'],
-    correctAnswer: 'Restore Thai wild elephant population'
+    question: 'What problem does the Sea Turtle Conservation at Koh Mannai solve?',
+    options: ['Sea turtles facing extinction', 'Slow tourism growth', 'Fishermen unemployment', 'Lack of seafood'],
+    correctAnswer: 'Sea turtles facing extinction',
+    benefit: 'Sea turtles help maintain seagrass and coral reef balance'
   }, {
     id: 5,
-    question: 'Which island did Her Majesty donate for sea turtle conservation?',
-    options: ['Koh Samui', 'Koh Mannai', 'Koh Tao', 'Koh Phi Phi'],
-    correctAnswer: 'Koh Mannai'
+    question: 'How does the Model Farm project support food security?',
+    options: ['Imports food from abroad', 'Teaches farmers to produce safe food and be self-sufficient', 'Distributes free food', 'Builds supermarkets'],
+    correctAnswer: 'Teaches farmers to produce safe food and be self-sufficient',
+    benefit: 'Communities can produce their own food sustainably'
   }, {
     id: 6,
-    question: 'Since when has Khon performance been preserved under Her Majesty\'s patronage?',
-    options: ['1997', '2000', '2003', '2007'],
-    correctAnswer: '2003'
+    question: 'How does Highland Agriculture reduce environmental problems in mountains?',
+    options: ['Builds roads up mountains', 'Promotes sustainable farming over slash-and-burn', 'Moves hill tribes to cities', 'Plants industrial crops'],
+    correctAnswer: 'Promotes sustainable farming over slash-and-burn',
+    benefit: 'Reduces deforestation of watershed forests and preserves mountain ecosystems'
   }],
   CN: [{
     id: 1,
-    question: 'SUPPORT基金会是什么时候成立的?',
-    options: ['1972年', '1976年', '1982年', '1987年'],
-    correctAnswer: '1976年'
+    question: '森林爱水项目主要解决哪个环境问题？',
+    options: ['空气污染', '水资源短缺和洪水', '塑料垃圾', '全球变暖'],
+    correctAnswer: '水资源短缺和洪水',
+    benefit: '流域森林吸收雨水并缓慢释放，减少洪水和干旱'
   }, {
     id: 2,
-    question: '森林爱水项目的主要目标是什么?',
-    options: ['促进旅游业', '恢复流域森林', '建造水坝', '种植经济作物'],
-    correctAnswer: '恢复流域森林'
+    question: 'SUPPORT基金会如何减少不平等？',
+    options: ['给村民发钱', '为贫困社区创造就业和收入', '将人们迁移到城市', '提供奖学金'],
+    correctAnswer: '为贫困社区创造就业和收入',
+    benefit: '村民可以通过编织和手工艺赚取收入，无需迁移'
   }, {
     id: 3,
-    question: '示范农场项目是什么时候开始的?',
-    options: ['1992年', '1995年', '1998年', '2002年'],
-    correctAnswer: '1998年'
+    question: '大象重归自然项目对生态系统有什么好处？',
+    options: ['吸引游客', '大象传播种子并创造水路', '减少大象过度繁殖', '训练大象工作'],
+    correctAnswer: '大象传播种子并创造水路',
+    benefit: '大象是"森林工程师"，帮助维持生物多样性'
   }, {
     id: 4,
-    question: '大象重归自然项目的主要目的是什么?',
-    options: ['训练大象用于旅游', '恢复泰国野生大象种群', '出口大象到国外', '饲养大象用于农业'],
-    correctAnswer: '恢复泰国野生大象种群'
+    question: '曼乃岛海龟保护项目解决了什么问题？',
+    options: ['海龟濒临灭绝', '旅游业增长缓慢', '渔民失业', '海鲜短缺'],
+    correctAnswer: '海龟濒临灭绝',
+    benefit: '海龟有助于维持海草和珊瑚礁的平衡'
   }, {
     id: 5,
-    question: '陛下捐赠了哪个岛屿用于海龟保护?',
-    options: ['苏梅岛', '曼乃岛', '涛岛', '皮皮岛'],
-    correctAnswer: '曼乃岛'
+    question: '示范农场项目如何支持粮食安全？',
+    options: ['从国外进口食品', '教农民生产安全食品并自给自足', '免费分发食品', '建设超市'],
+    correctAnswer: '教农民生产安全食品并自给自足',
+    benefit: '社区可以可持续地生产自己的食品'
   }, {
     id: 6,
-    question: '在陛下的赞助下,泰国传统戏剧从何时开始得到保护?',
-    options: ['1997年', '2000年', '2003年', '2007年'],
-    correctAnswer: '2003年'
+    question: '高地农业如何减少山区环境问题？',
+    options: ['修建山路', '推广可持续农业代替刀耕火种', '将山地部落迁移到城市', '种植工业作物'],
+    correctAnswer: '推广可持续农业代替刀耕火种',
+    benefit: '减少流域森林砍伐，保护山区生态系统'
   }]
 };
 
@@ -144,6 +162,9 @@ const LanternFlowModal = ({
   });
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
   const [wrongAnswerText, setWrongAnswerText] = useState<string | null>(null);
+  const [showAnswerRevealed, setShowAnswerRevealed] = useState(false);
+  const [earnedBonus, setEarnedBonus] = useState(false);
+  const [lanternCount, setLanternCount] = useState(1);
 
   useEffect(() => {
     if (!isOpen) {
@@ -157,6 +178,9 @@ const LanternFlowModal = ({
         setCurrentQuestion(questions[Math.floor(Math.random() * questions.length)]);
         setIsWrongAnswer(false);
         setWrongAnswerText(null);
+        setShowAnswerRevealed(false);
+        setEarnedBonus(false);
+        setLanternCount(1);
       }, 300);
     }
   }, [isOpen, language]);
@@ -186,11 +210,27 @@ const LanternFlowModal = ({
       setSelectedAnswer(answer);
       setIsWrongAnswer(false);
       setWrongAnswerText(null);
+      setEarnedBonus(true);
+      setLanternCount(2); // Bonus lantern for correct answer
       setStep('release');
     } else {
       setIsWrongAnswer(true);
       setWrongAnswerText(answer);
     }
+  };
+
+  const handleSkipQuestion = () => {
+    setSelectedAnswer(null);
+    setShowAnswerRevealed(true);
+  };
+
+  const handleShowAnswer = () => {
+    setShowAnswerRevealed(true);
+  };
+
+  const handleContinueAfterReveal = () => {
+    setSelectedAnswer(currentQuestion.correctAnswer);
+    setStep('release');
   };
 
   const handleRelease = () => {
@@ -399,6 +439,7 @@ const LanternFlowModal = ({
                       goBack();
                       setIsWrongAnswer(false);
                       setWrongAnswerText(null);
+                      setShowAnswerRevealed(false);
                     }}
                     className="absolute top-0 left-0 flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
                   >
@@ -414,7 +455,8 @@ const LanternFlowModal = ({
                     {selectedRegion === 'international' ? selectedProvince : `${t.lanternFlow.province}${selectedProvince}`}
                   </p>
 
-                  {isWrongAnswer && (
+                  {/* Wrong answer message */}
+                  {isWrongAnswer && !showAnswerRevealed && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -426,28 +468,74 @@ const LanternFlowModal = ({
                     </motion.div>
                   )}
 
-                  <div className="space-y-3">
-                    {currentQuestion.options.map(option => (
+                  {/* Show Answer Revealed State */}
+                  {showAnswerRevealed ? (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="space-y-4"
+                    >
+                      <div className="p-4 bg-gold/20 border border-gold/50 rounded-xl">
+                        <p className="text-foreground/70 text-sm mb-2">{t.lanternFlow.skippedInfo}</p>
+                        <p className="text-gold font-semibold text-lg">{currentQuestion.correctAnswer}</p>
+                        <p className="text-foreground/60 text-sm mt-2">{currentQuestion.benefit}</p>
+                      </div>
                       <motion.button
-                        key={option}
-                        onClick={() => handleAnswerSelect(option)}
-                        className={`w-full p-4 bg-secondary/50 border rounded-xl text-foreground text-left transition-all flex items-center gap-3 ${
-                          wrongAnswerText === option
-                            ? 'border-destructive/50 bg-destructive/10'
-                            : 'border-border hover:border-gold hover:bg-gold/10'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
+                        onClick={handleContinueAfterReveal}
+                        className="px-6 py-3 bg-gradient-to-r from-gold-dark via-gold to-gold-light text-primary-foreground font-semibold rounded-full"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <ChevronRight
-                          className={`w-5 h-5 flex-shrink-0 ${
-                            wrongAnswerText === option ? 'text-destructive' : 'text-gold'
-                          }`}
-                        />
-                        <span>{option}</span>
+                        {t.lanternFlow.releaseLantern} 🏮
                       </motion.button>
-                    ))}
-                  </div>
+                    </motion.div>
+                  ) : (
+                    <>
+                      {/* Answer options */}
+                      <div className="space-y-3 mb-6">
+                        {currentQuestion.options.map(option => (
+                          <motion.button
+                            key={option}
+                            onClick={() => handleAnswerSelect(option)}
+                            className={`w-full p-4 bg-secondary/50 border rounded-xl text-foreground text-left transition-all flex items-center gap-3 ${
+                              wrongAnswerText === option
+                                ? 'border-destructive/50 bg-destructive/10'
+                                : 'border-border hover:border-gold hover:bg-gold/10'
+                            }`}
+                            whileHover={{ scale: 1.01 }}
+                            whileTap={{ scale: 0.99 }}
+                          >
+                            <ChevronRight
+                              className={`w-5 h-5 flex-shrink-0 ${
+                                wrongAnswerText === option ? 'text-destructive' : 'text-gold'
+                              }`}
+                            />
+                            <span>{option}</span>
+                          </motion.button>
+                        ))}
+                      </div>
+
+                      {/* Skip / Show Answer buttons */}
+                      <div className="flex justify-center gap-3">
+                        <motion.button
+                          onClick={handleSkipQuestion}
+                          className="px-4 py-2 bg-secondary/50 border border-border hover:border-gold/50 rounded-full text-foreground/70 text-sm transition-all"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          {t.lanternFlow.skipQuestion}
+                        </motion.button>
+                        <motion.button
+                          onClick={handleShowAnswer}
+                          className="px-4 py-2 bg-secondary/50 border border-border hover:border-gold/50 rounded-full text-foreground/70 text-sm transition-all"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          {t.lanternFlow.showAnswer}
+                        </motion.button>
+                      </div>
+                    </>
+                  )}
                 </motion.div>
               )}
 
@@ -468,6 +556,19 @@ const LanternFlowModal = ({
                       <ChevronLeft className="w-5 h-5" />
                       <span>{t.lanternFlow.back}</span>
                     </button>
+                  )}
+
+                  {/* Bonus lantern indicator */}
+                  {earnedBonus && !isReleased && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mb-4 p-3 bg-gold/20 border border-gold/50 rounded-xl"
+                    >
+                      <p className="text-gold text-sm font-medium">
+                        {t.lanternFlow.correctAnswer}
+                      </p>
+                    </motion.div>
                   )}
 
                   {/* Lantern - uses new lantern image, no queen */}

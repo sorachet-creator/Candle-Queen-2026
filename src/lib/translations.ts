@@ -47,9 +47,15 @@ export const translations = {
       // Step 3: Question
       province: 'จังหวัด',
       wrongAnswer: 'คำตอบไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง',
+      skipQuestion: 'ข้ามคำถาม',
+      showAnswer: 'ดูเฉลย',
+      correctAnswer: '✅ เยี่ยมมาก! คุณได้รับโคมลอยโบนัส +1',
+      skippedInfo: 'คำตอบที่ถูกต้องคือ:',
+      bonusLantern: 'โคมลอยโบนัส',
       // Step 4: Release
       payTribute: 'น้อมถวายความอาลัย',
       releaseLantern: 'ปล่อยโคมลอย',
+      lanternCount: 'จำนวนโคมลอย',
       // Success
       thankYou: 'ขอบคุณที่ร่วมน้อมรำลึก',
       yourLanternFrom: 'โคมลอยของท่านจากจังหวัด',
@@ -57,6 +63,7 @@ export const translations = {
       shareTo: 'แชร์ไปยัง',
       close: 'ปิดหน้าต่าง',
       shareText: 'ข้าพเจ้าได้ร่วมจุดโคมลอยถวายความอาลัยแด่สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง',
+      viewRegionalMap: 'ดูแผนที่รายภาค',
     },
     // Province Stats Modal
     provinceStats: {
@@ -176,14 +183,21 @@ export const translations = {
       back: 'Back',
       province: 'Province',
       wrongAnswer: 'Incorrect answer. Please try again.',
+      skipQuestion: 'Skip Question',
+      showAnswer: 'Show Answer',
+      correctAnswer: '✅ Excellent! You earned a bonus lantern +1',
+      skippedInfo: 'The correct answer is:',
+      bonusLantern: 'Bonus Lantern',
       payTribute: 'Pay Tribute',
       releaseLantern: 'Release Lantern',
+      lanternCount: 'Lantern Count',
       thankYou: 'Thank You for Your Remembrance',
       yourLanternFrom: 'Your lantern from',
       hasRisen: 'has risen to the sky',
       shareTo: 'Share to',
       close: 'Close',
       shareText: 'I have released a lantern in tribute to Her Majesty Queen Sirikit The Queen Mother',
+      viewRegionalMap: 'View Regional Map',
     },
     // Province Stats Modal
     provinceStats: {
@@ -303,14 +317,21 @@ export const translations = {
       back: '返回',
       province: '省份',
       wrongAnswer: '答案不正确。请再试一次。',
+      skipQuestion: '跳过问题',
+      showAnswer: '显示答案',
+      correctAnswer: '✅ 太棒了！您获得了奖励天灯 +1',
+      skippedInfo: '正确答案是：',
+      bonusLantern: '奖励天灯',
       payTribute: '致敬',
       releaseLantern: '放天灯',
+      lanternCount: '天灯数量',
       thankYou: '感谢您的悼念',
       yourLanternFrom: '您来自的天灯',
       hasRisen: '已升上天空',
       shareTo: '分享到',
       close: '关闭',
       shareText: '我已放天灯致敬诗丽吉太后陛下',
+      viewRegionalMap: '查看地区地图',
     },
     // Province Stats Modal
     provinceStats: {
