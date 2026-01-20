@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Map } from 'lucide-react';
 import lanternImg from '@/assets/lantern.png';
 import LanternFlowModal from './LanternFlowModal';
 import ProvinceStatsModal from './ProvinceStatsModal';
+import RegionalMapModal from './RegionalMapModal';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 import queenHeroImg from '@/assets/queen-hero.png';
@@ -12,6 +13,7 @@ const HeroSection = () => {
   const [count, setCount] = useState(86080000);
   const [isLanternModalOpen, setIsLanternModalOpen] = useState(false);
   const [isProvinceModalOpen, setIsProvinceModalOpen] = useState(false);
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -96,13 +98,23 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          <button 
-            onClick={() => setIsProvinceModalOpen(true)}
-            className="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors mb-8 cursor-pointer"
-          >
-            {t.hero.viewProvinces}
-            <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
-          </button>
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <button 
+              onClick={() => setIsProvinceModalOpen(true)}
+              className="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors cursor-pointer"
+            >
+              {t.hero.viewProvinces}
+              <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
+            </button>
+            <span className="text-muted-foreground">|</span>
+            <button 
+              onClick={() => setIsMapModalOpen(true)}
+              className="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors cursor-pointer"
+            >
+              <Map className="w-4 h-4" />
+              {t.hero.viewRegionalMap}
+            </button>
+          </div>
 
           <p className="text-muted-foreground mb-4">
             {t.hero.pressButton}
@@ -144,6 +156,11 @@ const HeroSection = () => {
       <ProvinceStatsModal
         isOpen={isProvinceModalOpen}
         onClose={() => setIsProvinceModalOpen(false)}
+      />
+      
+      <RegionalMapModal
+        isOpen={isMapModalOpen}
+        onClose={() => setIsMapModalOpen(false)}
       />
     </>
   );
