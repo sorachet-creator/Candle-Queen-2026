@@ -20,7 +20,7 @@ const ExternalLinkBanner = () => {
         {/* Decorative divider */}
         <div className="flex items-center justify-center gap-4 mb-8">
           <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
-          <div className="w-3 h-3 rotate-45 border border-gold" />
+          <div className="w-3 h-3 rotate-45 bg-gold" />
           <div className="w-16 h-px bg-gradient-to-l from-transparent via-gold to-transparent" />
         </div>
 
