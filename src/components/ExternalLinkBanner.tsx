@@ -7,7 +7,7 @@ const ExternalLinkBanner = () => {
 
   return (
     <motion.section
-      className="relative py-16 px-6 border-t border-b border-gold/20"
+      className="relative py-16 px-6"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
