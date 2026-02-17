@@ -7,12 +7,12 @@ const ExternalLinkBanner = () => {
 
   return (
     <motion.section
-      className="relative py-16 px-6"
+      className="relative py-16 px-6 opacity-100 rounded-none shadow-none border-none border-0"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.7 }}
-    >
+      transition={{ duration: 0.7 }}>
+
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-gold/5 via-transparent to-gold/5 pointer-events-none" />
 
@@ -20,7 +20,7 @@ const ExternalLinkBanner = () => {
         {/* Decorative divider */}
         <div className="flex items-center justify-center gap-4 mb-8">
           <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
-          <div className="w-3 h-3 rotate-45 bg-gold" />
+          <div className="w-3 h-3 rotate-45 border border-gold" />
           <div className="w-16 h-px bg-gradient-to-l from-transparent via-gold to-transparent" />
         </div>
 
@@ -37,14 +37,14 @@ const ExternalLinkBanner = () => {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-gold-dark via-gold to-gold-light text-primary-foreground font-semibold rounded-full glow-gold hover:brightness-110 transition-all"
           whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
+          whileTap={{ scale: 0.95 }}>
+
           {t.externalLink.button}
           <ExternalLink className="w-4 h-4" />
         </motion.a>
       </div>
-    </motion.section>
-  );
+    </motion.section>);
+
 };
 
 export default ExternalLinkBanner;
