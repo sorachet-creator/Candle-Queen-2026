@@ -17,10 +17,15 @@ export const translations = {
       viewRegionalMap: 'ดูแผนที่รายภาค',
       pressButton: 'กดปุ่มด้านล่างเพื่อเริ่มจุดโคมลอย',
       lightLanternBtn: 'จุดโคมลอยถวายความอาลัย',
-      scrollDown: 'เลื่อนด้านล่างเพื่อชมพระราชกรณียกิจ',
       queenAlt: 'สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง',
     },
-    // Royal Duties Section
+    // External Link Banner
+    externalLink: {
+      title: 'ศึกษาพระราชกรณียกิจเพิ่มเติม',
+      description: 'เชิญเยี่ยมชมเว็บไซต์กรมประชาสัมพันธ์ เพื่อศึกษาพระราชกรณียกิจและพระมหากรุณาธิคุณอันยิ่งใหญ่',
+      button: 'เยี่ยมชมเว็บไซต์กรมประชาสัมพันธ์',
+    },
+    // Royal Duties Section (kept for ProjectDetail compatibility)
     royalDuties: {
       subtitle: 'THE ROYAL DUTIES',
       title: 'พระราชกรณียกิจ',
@@ -157,10 +162,14 @@ export const translations = {
       viewRegionalMap: 'View Regional Map',
       pressButton: 'Press the button below to release a lantern',
       lightLanternBtn: 'Release Lantern in Tribute',
-      scrollDown: 'Scroll down to view Royal Duties',
       queenAlt: 'Her Majesty Queen Sirikit The Queen Mother',
     },
-    // Royal Duties Section
+    // External Link Banner
+    externalLink: {
+      title: 'Learn More About Royal Duties',
+      description: 'Visit the Government Public Relations Department website to learn about the royal initiatives and benevolence.',
+      button: 'Visit PRD Website',
+    },
     royalDuties: {
       subtitle: 'THE ROYAL DUTIES',
       title: 'Royal Duties',
@@ -292,10 +301,14 @@ export const translations = {
       viewRegionalMap: '查看地区地图',
       pressButton: '点击下方按钮放天灯',
       lightLanternBtn: '放天灯致敬',
-      scrollDown: '向下滚动查看皇室职责',
       queenAlt: '诗丽吉太后陛下',
     },
-    // Royal Duties Section
+    // External Link Banner
+    externalLink: {
+      title: '了解更多皇室职责',
+      description: '访问政府公共关系部网站，了解皇室倡议和仁慈。',
+      button: '访问公关部网站',
+    },
     royalDuties: {
       subtitle: 'THE ROYAL DUTIES',
       title: '皇室职责',

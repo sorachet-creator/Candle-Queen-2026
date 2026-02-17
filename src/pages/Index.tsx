@@ -1,6 +1,6 @@
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
-import RoyalDutiesSection from '@/components/RoyalDutiesSection';
+import ExternalLinkBanner from '@/components/ExternalLinkBanner';
 import FloatingLanterns from '@/components/FloatingLanterns';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -13,7 +13,7 @@ const Index = () => {
       <Header />
       <main className="relative z-10">
         <HeroSection />
-        <RoyalDutiesSection />
+        <ExternalLinkBanner />
       </main>
       
       <footer className="relative z-10 py-8 border-t border-border/30 text-center">
