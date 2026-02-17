@@ -129,21 +129,6 @@ const HeroSection = () => {
             {t.hero.lightLanternBtn}
           </motion.button>
 
-          <motion.a
-            href="#royal-duties"
-            className="mt-16 flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-          >
-            <span>{t.hero.scrollDown}</span>
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <ChevronDown className="w-6 h-6 text-gold" />
-            </motion.div>
-          </motion.a>
         </motion.div>
       </section>
 

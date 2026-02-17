@@ -26,9 +26,6 @@ const Header = () => {
           <a href="#lanterns" className="text-foreground/80 hover:text-gold transition-colors">
             {t.header.lightLantern}
           </a>
-          <a href="#royal-duties" className="text-foreground/80 hover:text-gold transition-colors">
-            {t.header.royalDuties}
-          </a>
         </nav>
 
         <div className="flex items-center bg-secondary rounded-full p-1">
